@@ -103,16 +103,20 @@ class ProductsController extends Controller
         $colors = Color::get();
         $styles = Style::get();
 
-        $last = DB::table('products') ->orderBy('id', 'desc') ->first();
-        $start = date('Y-m-d 00:00:00',strtotime($last->created_at));
-        $end = date('Y-m-d 23:59:59',strtotime($last->created_at));
-
-        $count = DB::table('products')->whereBetween('created_at',[strtotime($start),strtotime($end)])->count();
-
+        $count = 0;
         $created_at = date('Y-m-d H:i:s');
-        if($count>6){
-            $d = date('Y-m-d',strtotime(" $start +1 day"))." ".date('H').":".date('i').":".date('s');
-            $created_at = date('Y-m-d H:i:s', $d);
+
+        $last = DB::table('products') ->orderBy('id', 'desc') ->first();
+        if($last){
+            $start = date('Y-m-d 00:00:00',strtotime($last->created_at));
+            $end = date('Y-m-d 23:59:59',strtotime($last->created_at));
+
+            $count = DB::table('products')->whereBetween('created_at',[strtotime($start),strtotime($end)])->count();
+
+            if($count>6){
+                $d = date('Y-m-d',strtotime(" $start +1 day"))." ".date('H').":".date('i').":".date('s');
+                $created_at = date('Y-m-d H:i:s', $d);
+            }
         }
 
 
