@@ -133,7 +133,6 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request,$this->rule);
-
         $cate_str = $request['cate_str'];
         $arr = explode('/',$cate_str);
         $data['cate_id'] = $arr[count($arr)-1];
