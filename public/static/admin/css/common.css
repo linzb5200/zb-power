@@ -1,0 +1,111 @@
+/*上传图片*/
+.upload-container li img{
+    width:95px;
+    height:95px;
+}
+.upload-container li.img-item {
+    position:relative;
+    display:inline-block;
+    vertical-align:top;
+    margin-bottom:5px;
+    width:95px;
+    height:95px;
+    margin-right:10px;
+    border-radius:3px;
+    border:1px solid #ddd;
+}
+
+.upload-container li.img-item i {
+    position:absolute;
+    cursor:pointer;
+    bottom:0;
+    font-size:16px;
+    color:#fff;
+    width:23px;
+    height:23px;
+    text-align:center;
+    opacity:0.75;
+    background-color:rgba(0,0,0,0.5);
+    line-height:23px;
+    font-style: normal;
+}
+.upload-container li.img-item i.fa-arrow-left {
+    left:0
+}
+.upload-container li.img-item i.fa-search-plus {
+    left:24px
+}
+.upload-container li.img-item i.fa-trash {
+    left:48px;
+    color:#ec0707
+}
+.upload-container li.img-item i.fa-arrow-right {
+    right:0
+}
+.upload-container li.img-item i.tip {
+    width: 100%;
+    height: 22px;
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 22px;
+    text-align: center;
+    color: #fff;
+    background-color: #333;
+    opacity: 0.6;
+}
+
+/*上传文件*/
+
+.upload-container li.file-item {
+    position:relative;
+    display:inline-block;
+    vertical-align:top;
+    margin-bottom:5px;
+    width:50%;
+    margin-right:10px;
+    border-radius:3px;
+    border:1px solid #ddd;
+}
+.upload-container li input{
+    width:100%;
+    margin-bottom:5px;
+}
+
+.upload-container li.file-item i:not(.tip) {
+    cursor:pointer;
+    bottom:0;
+    font-size:16px;
+    color:#fff;
+    width:23px;
+    height:23px;
+    text-align:center;
+    opacity:0.75;
+    background-color:rgba(0,0,0,0.5);
+    line-height:23px;
+    font-style: normal;
+    margin-right:5px;
+}
+.upload-container li.file-item i.fa-arrow-left {
+    left:0
+}
+.upload-container li.file-item i.fa-search-plus {
+    left:24px
+}
+.upload-container li.file-item i.fa-trash {
+    left:48px;
+    color:#ec0707
+}
+.upload-container li.file-item i.fa-arrow-right {
+    right:0
+}
+.upload-container li.file-item i.tip {
+    width: 100%;
+    height: 22px;
+    font-size: 12px;
+    left: 0;
+    top: 0;
+    line-height: 22px;
+    text-align: center;
+}
