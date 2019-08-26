@@ -42,6 +42,11 @@ class Products extends Model
     {
         return $this->belongsToMany('App\Models\Style','products_style','product_id','style_id');
     }
+    //与行业配置多对多关联
+    public function trades()
+    {
+        return $this->belongsToMany('App\Models\Trades','products_trade','product_id','trade_id');
+    }
 
     public function getInfo($id = 0){
         $info = $this->where('id', $id)->first()->toArray();

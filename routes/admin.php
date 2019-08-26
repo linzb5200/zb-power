@@ -264,6 +264,19 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
         //删除
         Route::delete('style/destroy', 'StyleController@destroy')->name('admin.style.destroy')->middleware('permission:admin.style.destroy');
     });
+    //行业分类管理
+    Route::group(['middleware' => 'permission:config.trades'], function () {
+        Route::get('trades/data', 'TradesController@data')->name('admin.trades.data');
+        Route::get('trades', 'TradesController@index')->name('admin.trades');
+        //添加
+        Route::get('trades/create', 'TradesController@create')->name('admin.trades.create')->middleware('permission:admin.trades.create');
+        Route::post('trades/store', 'TradesController@store')->name('admin.trades.store')->middleware('permission:admin.trades.create');
+        //编辑
+        Route::get('trades/{id}/edit', 'TradesController@edit')->name('admin.trades.edit')->middleware('permission:admin.trades.edit');
+        Route::put('trades/{id}/update', 'TradesController@update')->name('admin.trades.update')->middleware('permission:admin.trades.edit');
+        //删除
+        Route::delete('trades/destroy', 'TradesController@destroy')->name('admin.trades.destroy')->middleware('permission:admin.trades.destroy');
+    });
     //广告位
     Route::group(['middleware' => 'permission:config.position'], function () {
         Route::get('position/data', 'PositionController@data')->name('admin.position.data');

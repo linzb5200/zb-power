@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Color;
+use App\Models\Trades;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ColorController extends Controller
+class TradesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +16,12 @@ class ColorController extends Controller
     public function index()
     {
 
-        return view('admin.colors.index');
+        return view('admin.trades.index');
     }
 
     public function data(Request $request)
     {
-        $res = Color::orderBy('id','desc')->orderBy('sort','desc')->paginate($request->get('limit',30))->toArray();
+        $res = Trades::orderBy('id','desc')->orderBy('sort','desc')->paginate($request->get('limit',30))->toArray();
         $data = [
             'code' => 0,
             'msg'   => '正在请求中...',
@@ -38,7 +38,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        return view('admin.colors.create');
+        return view('admin.trades.create');
     }
 
     /**
@@ -53,10 +53,10 @@ class ColorController extends Controller
             'name'  => 'required|string',
             'sort'  => 'required|numeric'
         ]);
-        if (Color::create($request->all())){
-            return redirect(route('admin.color'))->with(['status'=>'添加完成']);
+        if (Trades::create($request->all())){
+            return redirect(route('admin.trades'))->with(['status'=>'添加完成']);
         }
-        return redirect(route('admin.color'))->with(['status'=>'系统错误']);
+        return redirect(route('admin.trades'))->with(['status'=>'系统错误']);
     }
 
     /**
@@ -78,8 +78,8 @@ class ColorController extends Controller
      */
     public function edit($id)
     {
-        $color = Color::findOrFail($id);
-        return view('admin.colors.edit',compact('color'));
+        $style = Trades::findOrFail($id);
+        return view('admin.trades.edit',compact('style'));
     }
 
     /**
@@ -95,11 +95,11 @@ class ColorController extends Controller
             'name'  => 'required|string',
             'sort'  => 'required|numeric'
         ]);
-        $color = Color::findOrFail($id);
-        if ($color->update($request->only(['name','sort']))){
-            return redirect(route('admin.color'))->with(['status'=>'更新成功']);
+        $style = Trades::findOrFail($id);
+        if ($style->update($request->only(['name','sort']))){
+            return redirect(route('admin.trades'))->with(['status'=>'更新成功']);
         }
-        return redirect(route('admin.color'))->withErrors(['status'=>'系统错误']);
+        return redirect(route('admin.trades'))->withErrors(['status'=>'系统错误']);
     }
 
     /**
@@ -114,7 +114,7 @@ class ColorController extends Controller
         if (empty($ids)){
             return response()->json(['code'=>1,'msg'=>'请选择删除项']);
         }
-        if (Color::destroy($ids)){
+        if (Trades::destroy($ids)){
             return response()->json(['code'=>0,'msg'=>'删除成功']);
         }
         return response()->json(['code'=>1,'msg'=>'删除失败']);

@@ -46,18 +46,26 @@
     </div>
 </div>
 <div class="layui-form-item">
-    <label for="" class="layui-form-label">颜色</label>
-    <div class="layui-input-block">
-        @foreach($colors as $color)
-            <input type="checkbox" name="color[]" value="{{$color['id']}}" title="{{$color['name']}}" {{ $color->checked??'' }}>
-        @endforeach
-    </div>
-</div>
-<div class="layui-form-item">
     <label for="" class="layui-form-label">风格</label>
     <div class="layui-input-block">
         @foreach($styles as $style)
             <input type="checkbox" name="style[]" value="{{$style['id']}}" title="{{$style['name']}}" {{ $style->checked??'' }}>
+        @endforeach
+    </div>
+</div>
+<div class="layui-form-item">
+    <label for="" class="layui-form-label">行业</label>
+    <div class="layui-input-block">
+        @foreach($trades as $trade)
+            <input type="checkbox" name="trades[]" value="{{$trade['id']}}" title="{{$trade['name']}}" {{ $trade->checked??'' }}>
+        @endforeach
+    </div>
+</div>
+<div class="layui-form-item">
+    <label for="" class="layui-form-label">颜色</label>
+    <div class="layui-input-block">
+        @foreach($colors as $color)
+            <input type="checkbox" name="color[]" value="{{$color['id']}}" title="{{$color['name']}}" {{ $color->checked??'' }}>
         @endforeach
     </div>
 </div>
