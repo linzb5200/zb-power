@@ -198,7 +198,7 @@
     </div>
 </div>
 
-<div class="layui-form-item">
+<div class="layui-form-item" style="position: fixed;z-index:9999;bottom: 5px;margin-top: 5px;">
     <div class="layui-input-block">
         <button type="submit" class="layui-btn" lay-submit="" lay-filter="formDemo">确 认</button>
         <a  class="layui-btn" href="{{route('admin.products')}}" >返 回</a>
