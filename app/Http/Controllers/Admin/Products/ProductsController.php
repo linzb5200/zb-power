@@ -32,6 +32,8 @@ class ProductsController extends Controller
             'rand_download' =>'nullable|numeric',
             'size' =>'nullable|numeric',
             'format' =>'nullable',
+            'soft' =>'nullable',
+            'type' =>'nullable',
             'page' =>'nullable',
             'thumb' =>'nullable|numeric',
             'attachment' =>'nullable',

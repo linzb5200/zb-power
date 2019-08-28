@@ -18,7 +18,7 @@ class Products extends Model
      */
 
     protected $fillable = [
-        'cate_id','cate_str','title','keywords','description','color','tag', 'points','size','clicks','fav','zan','used','download','rand_clicks','rand_fav','rand_zan','rand_used','rand_download','format','page','thumb','attachment','content','sort','status','created_at','updated_at'
+        'cate_id','cate_str','title','keywords','description','color','tag', 'points','size','clicks','fav','zan','used','download','rand_clicks','rand_fav','rand_zan','rand_used','rand_download','soft','type','format','page','thumb','attachment','content','sort','status','created_at','updated_at'
     ];
 
     //文章所属分类
