@@ -29,7 +29,8 @@ class Controller extends BaseController
             view()->share('nav',$this->nav);
 
             $modelCate = new ProductsCate();
-            view()->share('costCate',$modelCate->getCacheList());
+            $this->costCate = $modelCate->getCacheList();
+            view()->share('costCate',$this->costCate);
 
             $modelColor = new Color();
             $this->costColors = $modelColor->getCacheList();

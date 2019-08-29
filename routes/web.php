@@ -19,17 +19,19 @@ Route::get('/','Home\IndexController@index')->name('home');
 //前后产品
 Route::group(['namespace' => 'Home\Products'], function () {
 
-    Route::get('/{cate}/{py}/list-{sort}-{page}','ProductsController@index')->name('products.index')
-        ->where([ 'cate' => '^ppt|excel|word|resume|design','py' => '[a-z]+','sort' => '[a-z]+','page' => '[0-9]+']);
 
-    Route::get('/{cate}/list-{sort}-{page}','ProductsController@index')->name('products.index')
-        ->where([ 'cate' => '^ppt|excel|word|resume|design','sort' => '[a-z]+','page' => '[0-9]+']);
+    Route::get('/{cate}/','ProductsController@index')->name('products.index')
+        ->where([ 'cate' => '^ppt|excel|word|resume|design']);
 
-    Route::get('/{cate}/{py?}','ProductsController@index')->name('products.index')
-        ->where([ 'cate' => '^ppt|excel|word|resume|design','py' => '[a-z]+']);
+    Route::get('/{cate}/{zm}/','ProductsController@index')->name('products.index')
+        ->where([ 'cate' => '^ppt|excel|word|resume|design','zm' => '[a-z0-9]']);
 
-    Route::get('/{cate}/{py}/{id?}','ProductsController@show')->name('products.show')
-        ->where([ 'cate' => '^ppt|excel|word|resume|design','py' => '[a-z]+','id' => '[0-9]+']);
+    Route::get('/{cate}/{trade}{style}{color}{soft}{type}{scale}{sort}{page}.html','ProductsController@index')->name('products.index')
+        ->where([ 'cate' => '^ppt|excel|word|resume|design','trade' => '[a-z0-9]','style' => '[a-z0-9]','color' => '[a-z0-9]','soft' => '[0-9]','type' => '[0-9]','scale' => '[0-9]','sort' => '[0-9]','page' => '[0-9]+']);
+
+    Route::get('/{cate}/{zm}/{trade}{style}{color}{soft}{type}{scale}{sort}{page}.html','ProductsController@index')->name('products.index')
+        ->where([ 'cate' => '^ppt|excel|word|resume|design','zm' => '[a-z0-9]','trade' => '[a-z0-9]','style' => '[a-z0-9]','color' => '[a-z0-9]','soft' => '[0-9]','type' => '[0-9]','scale' => '[0-9]','sort' => '[0-9]','page' => '[0-9]+']);
+
 
     Route::post('/search','ProductsController@search')->name('products.search');
     Route::get('/download','ProductsController@download')->name('download');

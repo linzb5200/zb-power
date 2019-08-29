@@ -13,28 +13,28 @@
                 <cite>用途：</cite>
                 <span class="layui-breadcrumb" lay-separator=" " style="visibility: visible;">
         <a href="/{{$cateInfo['zm']}}/" class="active">全部</a><span lay-separator=""> </span>
-                    @foreach($categorys as $category)
-        <a href="/{{$cateInfo['zm']}}/{{$category['zm']}}/">{{$category['title']}}</a><span lay-separator=""> </span>
-                    @endforeach
+        @foreach($categorys as $cg)
+        <a href="/{{$cateInfo['zm']}}/{{$cg['zm']}}/">{{$cg['title']}}</a><span lay-separator=""> </span>
+        @endforeach
       </span>
             </div>
             <div class="breadcrumb mb-10 ">
                 <cite>行业：</cite>
                 <span class="layui-breadcrumb"  lay-separator=" " style="visibility: visible;">
-        <a href="#" class="active">全部</a><span lay-separator=""> </span>
-                    @foreach($costTrades as $ct)
-                        <a href="/{{$cateInfo['zm']}}/{{$ct['zm']}}/">{{$ct['name']}}</a><span lay-separator=""> </span>
-                    @endforeach
+        <a href="{{myRoute('all_trade',0,'.html')}}" class="active">全部</a><span lay-separator=""> </span>
+        @foreach($costTrades as $ct)
+        <a href="{{myRoute('trade',$ct['zm'],'.html')}}">{{$ct['name']}}</a><span lay-separator=""> </span>
+        @endforeach
       </span>
             </div>
             <div class="breadcrumb mb-10">
                 <cite>风格：</cite>
                 <span class="layui-breadcrumb"  lay-separator=" " style="visibility: visible;">
 
-        <a href="#" class="active">全部</a><span lay-separator=""> </span>
-                    @foreach($costStyles as $cs)
-                        <a href="/{{$cateInfo['zm']}}/{{$cs['zm']}}/">{{$cs['name']}}</a><span lay-separator=""> </span>
-                    @endforeach
+        <a href="{{myRoute('all_style',0,'.html')}}" class="active">全部</a><span lay-separator=""> </span>
+        @foreach($costStyles as $cs)
+        <a href="{{myRoute('style',$cs['zm'],'.html')}}">{{$cs['name']}}</a><span lay-separator=""> </span>
+        @endforeach
       </span>
             </div>
         </div>
@@ -46,10 +46,10 @@
         <div class="fly-filter">
             <div class="layui-tab layui-tab-brief order-tab">
                 <ul class="layui-tab-title">
-                    <li class="layui-this"><a href="">综合排序</a></li>
-                    <li><a href="">热门下载</a></li>
-                    <li><a href="">最多收藏</a></li>
-                    <li><a href="">最新上传</a></li>
+                    <li class="layui-this"><a href="{{myRoute('sort',1,'.html')}}">综合排序</a></li>
+                    <li><a href="{{myRoute('sort',2,'.html')}}">热门下载</a></li>
+                    <li><a href="{{myRoute('sort',3,'.html')}}">最多收藏</a></li>
+                    <li><a href="{{myRoute('sort',4,'.html')}}">最新上传</a></li>
                     <li class="fr" style="width: 400px;">
                     </li>
                 </ul>
@@ -61,25 +61,26 @@
                     <li class="layui-nav-item">
                         <a href="javascript:;">色系</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="">红色</a></dd>
-                            <dd><a href="">黑色</a></dd>
+                            @foreach($costColors as $cc)
+                                <dd><a href="{{myRoute('color',$cc['zm'],'.html')}}">{{$cc['name']}}</a></dd>
+                            @endforeach
                         </dl>
                     </li>
                     <li class="layui-nav-item">
                         <a href="javascript:;">软件</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="#">PowerPoint 2003</a></dd>
-                            <dd><a href="#">PowerPoint 2007</a></dd>
-                            <dd><a href="#">PowerPoint 2010</a></dd>
-                            <dd><a href="#">PowerPoint 2016</a></dd>
-                            <dd><a href="#">其他版本</a></dd>
+                            <dd><a href="{{myRoute('soft',1,'.html')}}">PowerPoint 2003</a></dd>
+                            <dd><a href="{{myRoute('soft',2,'.html')}}">PowerPoint 2007</a></dd>
+                            <dd><a href="{{myRoute('soft',3,'.html')}}">PowerPoint 2010</a></dd>
+                            <dd><a href="{{myRoute('soft',4,'.html')}}">PowerPoint 2016</a></dd>
+                            <dd><a href="{{myRoute('soft',5,'.html')}}">其他版本</a></dd>
                         </dl>
                     </li>
                     <li class="layui-nav-item">
                         <a href="javascript:;">类型</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="">动态模版</a></dd>
-                            <dd><a href="">静态模版</a></dd>
+                            <dd><a href="{{myRoute('type',1,'.html')}}">动态模版</a></dd>
+                            <dd><a href="{{myRoute('type',2,'.html')}}">静态模版</a></dd>
                         </dl>
                     </li>
                 </ul>

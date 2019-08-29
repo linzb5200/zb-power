@@ -20,6 +20,30 @@ class Products extends Model
     protected $fillable = [
         'cate_id','cate_str','title','keywords','description','color','tag', 'points','size','clicks','fav','zan','used','download','rand_clicks','rand_fav','rand_zan','rand_used','rand_download','soft','type','format','page','thumb','attachment','content','sort','status','created_at','updated_at'
     ];
+    public $otherAttr = [
+        'soft'=>[
+            1=>'PowerPoint 2003',
+            2=>'PowerPoint 2007',
+            3=>'PowerPoint 2010',
+            4=>'PowerPoint 2016',
+            5=>'其他版本',
+        ],
+        'type'=>[
+            1=>'动态模版',
+            2=>'静态模版',
+        ],
+        'scale'=>[
+            1=>'宽屏16:9',
+            2=>'普屏4:3',
+            3=>'竖屏A4',
+        ],
+        'sort'=>[
+            1=>'all',
+            2=>'hot',
+            3=>'fav',
+            4=>'new',
+        ]
+    ];
 
     //文章所属分类
     public function category()

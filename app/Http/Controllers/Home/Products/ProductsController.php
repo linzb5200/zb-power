@@ -15,21 +15,19 @@ class ProductsController extends Controller
     }
     public function index(Request $request)
     {
-        $arg = getArg(['cate','zm','sort','page']);
-        $cate = $arg['cate'];
-        $zm = $arg['zm'];
-        $sort = $arg['sort'];
-        $page = $arg['page'];
+
+        $arg = $this->myArg();
+
 
         $modelCate = new ProductsCate();
 
-        $cateInfo = $modelCate->getInfo($cate); //获取父类
-        $fid = $cateInfo['id'];
-        $categorys = $this->nav[$fid]['children'];//获取父类下所有子类
+        $fid = $arg['cate']['id'];
+        $cateInfo = $arg['cate'];
+        $categorys = $arg['cate']['children'];//获取父类下所有子类
 
-        if($zm && !is_numeric($zm)){
-            $info = $modelCate->getInfo($zm);
-            $fid = $info['id'];
+        $zm = $arg['zm'];
+        if(!empty($zm)){
+            $fid = $zm['id'];
         }
 
         $childIds = $modelCate->getChilds($fid); //获取当前分类下所有子分类ids
@@ -115,4 +113,54 @@ class ProductsController extends Controller
 
         return $temp;
     }
+
+
+    //伪静态转真实数据
+    public function myArg()
+    {
+        $arg = getArg(['cate','zm','color','style','trade','soft','type','scale','sort','page']);
+        $this->nav;
+        $this->costColors;
+        $this->costStyles;
+        $this->costTrades;
+
+        foreach ($this->nav as $cate){
+            if($cate['zm'] == $arg['cate']) {
+                $arg['cate'] = $cate;
+
+                foreach ($cate['children'] as $child){
+                    if($child['zm'] == $arg['zm']) {
+                        $arg['zm'] = $child;
+                        continue;
+                    }
+                }
+
+                continue;
+            }
+        }
+
+        foreach ($this->costColors as $color){
+            if($color['zm'] == $arg['color']) {
+                $arg['color'] = $color['id'];
+                continue;
+            }
+        }
+
+        foreach ($this->costStyles as $style){
+            if($style['zm'] == $arg['style']) {
+                $arg['style'] = $style['id'];
+                continue;
+            }
+        }
+
+        foreach ($this->costTrades as $trade){
+            if($trade['zm'] == $arg['trade']) {
+                $arg['trade'] = $trade['id'];
+                continue;
+            }
+        }
+        return $arg;
+    }
+
+
 }
