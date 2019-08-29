@@ -45,6 +45,7 @@
                         {checkbox: true,fixed: true}
                         ,{field: 'id', title: 'ID', sort: true,width:80}
                         ,{field: 'name', title: '标签名称'}
+                        ,{field: 'zm', title: '字母'}
                         ,{field: 'sort', title: '排序'}
                         ,{field: 'created_at', title: '创建时间'}
                         ,{field: 'updated_at', title: '更新时间'}

@@ -54,6 +54,8 @@ class StyleController extends Controller
             'sort'  => 'required|numeric'
         ]);
         if (Style::create($request->all())){
+            $model = new Style;
+            $model->zm();
             return redirect(route('admin.style'))->with(['status'=>'添加完成']);
         }
         return redirect(route('admin.style'))->with(['status'=>'系统错误']);
@@ -95,8 +97,9 @@ class StyleController extends Controller
             'name'  => 'required|string',
             'sort'  => 'required|numeric'
         ]);
-        $style = Style::findOrFail($id);
-        if ($style->update($request->only(['name','sort']))){
+        $model = Style::findOrFail($id);
+        if ($model->update($request->only(['name','sort']))){
+            $model->zm();
             return redirect(route('admin.style'))->with(['status'=>'更新成功']);
         }
         return redirect(route('admin.style'))->withErrors(['status'=>'系统错误']);
@@ -115,6 +118,8 @@ class StyleController extends Controller
             return response()->json(['code'=>1,'msg'=>'请选择删除项']);
         }
         if (Style::destroy($ids)){
+            $model = new Style;
+            $model->zm();
             return response()->json(['code'=>0,'msg'=>'删除成功']);
         }
         return response()->json(['code'=>1,'msg'=>'删除失败']);

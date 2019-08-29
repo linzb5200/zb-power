@@ -489,3 +489,53 @@ function getCateStr($str,$splt='/')
 
     return $new;
 }
+
+//字母标记数组
+function getZm($array)
+{
+    $str = 'a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z';
+    $zm = explode('|',$str);
+    foreach ($array as $k => &$arr){
+        $arr['zm'] = $zm[$k];
+    }
+    return $array;
+}
+
+//同时更新多个记录
+function updateBatch($tableName,$multipleData = [])
+{
+    try {
+        if (empty($multipleData)) {
+            throw new \Exception("数据不能为空");
+        }
+        $firstRow  = current($multipleData);
+
+        $updateColumn = array_keys($firstRow);
+        // 默认以id为条件更新，如果没有ID则以第一个字段为条件
+        $referenceColumn = isset($firstRow['id']) ? 'id' : current($updateColumn);
+        unset($updateColumn[0]);
+        // 拼接sql语句
+        $updateSql = "UPDATE " . $tableName . " SET ";
+        $sets      = [];
+        $bindings  = [];
+        foreach ($updateColumn as $uColumn) {
+            $setSql = "`" . $uColumn . "` = CASE ";
+            foreach ($multipleData as $data) {
+                $setSql .= "WHEN `" . $referenceColumn . "` = ? THEN ? ";
+                $bindings[] = $data[$referenceColumn];
+                $bindings[] = $data[$uColumn];
+            }
+            $setSql .= "ELSE `" . $uColumn . "` END ";
+            $sets[] = $setSql;
+        }
+        $updateSql .= implode(', ', $sets);
+        $whereIn   = collect($multipleData)->pluck($referenceColumn)->values()->all();
+        $bindings  = array_merge($bindings, $whereIn);
+        $whereIn   = rtrim(str_repeat('?,', count($whereIn)), ',');
+        $updateSql = rtrim($updateSql, ", ") . " WHERE `" . $referenceColumn . "` IN (" . $whereIn . ")";
+        // 传入预处理sql语句和对应绑定数据
+        return DB::update($updateSql, $bindings);
+    } catch (\Exception $e) {
+        return false;
+    }
+}

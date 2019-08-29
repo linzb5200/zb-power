@@ -54,6 +54,8 @@ class TradesController extends Controller
             'sort'  => 'required|numeric'
         ]);
         if (Trades::create($request->all())){
+            $model = new Trades;
+            $model->zm();
             return redirect(route('admin.trades'))->with(['status'=>'添加完成']);
         }
         return redirect(route('admin.trades'))->with(['status'=>'系统错误']);
@@ -78,8 +80,8 @@ class TradesController extends Controller
      */
     public function edit($id)
     {
-        $style = Trades::findOrFail($id);
-        return view('admin.trades.edit',compact('style'));
+        $trades = Trades::findOrFail($id);
+        return view('admin.trades.edit',compact('trades'));
     }
 
     /**
@@ -97,6 +99,7 @@ class TradesController extends Controller
         ]);
         $style = Trades::findOrFail($id);
         if ($style->update($request->only(['name','sort']))){
+            $style->zm();
             return redirect(route('admin.trades'))->with(['status'=>'更新成功']);
         }
         return redirect(route('admin.trades'))->withErrors(['status'=>'系统错误']);
@@ -115,6 +118,8 @@ class TradesController extends Controller
             return response()->json(['code'=>1,'msg'=>'请选择删除项']);
         }
         if (Trades::destroy($ids)){
+            $model = new Trades;
+            $model->zm();
             return response()->json(['code'=>0,'msg'=>'删除成功']);
         }
         return response()->json(['code'=>1,'msg'=>'删除失败']);

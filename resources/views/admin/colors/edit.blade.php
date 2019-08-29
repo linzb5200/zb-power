@@ -8,7 +8,7 @@
         <div class="layui-card-body">
             <form class="layui-form" action="{{route('admin.color.update',['id'=>$color->id])}}" method="post">
                 {{ method_field('put') }}
-                @include('admin.color._form')
+                @include('admin.colors._form')
             </form>
         </div>
     </div>

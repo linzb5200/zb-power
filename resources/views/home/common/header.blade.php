@@ -7,13 +7,13 @@
 
         <ul class="layui-nav layui-layout-left layui-bg-white " lay-filter="">
 
-            @foreach($navs as $key => $nav)
+            @foreach($nav as $key => $nv)
             <li class="layui-nav-item">
-                <a href="/@if($nav['pinyin']!=''){{$nav['pinyin']}}@endif/">{{$nav['title']}}</a>
-                @if($nav['children'])
+                <a href="/@if($nv['zm']!=''){{$nv['zm']}}@endif/">{{$nv['title']}}</a>
+                @if($nv['children'])
                 <dl class="layui-nav-child">
-                    @foreach($nav['children'] as $child)
-                        <dd><a href="/@if($nav['pinyin']!=''){{$nav['pinyin']}}@endif/@if($child['pinyin']!=''){{$child['pinyin']}}/@endif">{{$child['title']}}</a></dd>
+                    @foreach($nv['children'] as $child)
+                        <dd><a href="/@if($nv['zm']!=''){{$nv['zm']}}@endif/@if($child['zm']!=''){{$child['zm']}}/@endif">{{$child['title']}}</a></dd>
                     @endforeach
                 </dl>
                 @endif

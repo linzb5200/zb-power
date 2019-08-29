@@ -86,6 +86,8 @@ class ProductsCateController extends Controller
         }
 
         if (ProductsCate::create($data)){
+            $model = new ProductsCate;
+            $model->zm($data['parent_id']);
             return redirect(route('admin.products_cate',['parent_id'=>$data['parent_id']]))->with(['status'=>'添加完成']);
         }
         return redirect(route('admin.products_cate'))->with(['status'=>'系统错误']);
@@ -122,13 +124,17 @@ class ProductsCateController extends Controller
             $pinyin = new Pinyin();
             $data['pinyin'] = $pinyin->permalink($data['title'],'');
         }
-        $ret = ProductsCate::findOrFail($id);
-        if ($ret->update($data)){
+
+        if($data['parent_id'] == 0){
+            $data['zm'] = $data['pinyin'];
+        }
+
+        $model = ProductsCate::findOrFail($id);
+        if ($model->update($data)){
+            $model->zm($data['parent_id']);
             return redirect(route('admin.products_cate',['parent_id'=>$data['parent_id']]))->with(['status'=>'更新成功']);
         }
         return redirect(route('admin.products_cate'))->withErrors(['status'=>'系统错误']);
-
-
     }
 
     /**

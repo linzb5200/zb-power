@@ -46,8 +46,8 @@
                         {checkbox: true,fixed: true}
                         ,{field: 'id', title: 'ID', sort: true,width:80}
                         ,{field: 'title', title: '分类名称'}
-                        ,{field: 'pinyin', title: '拼音'}
                         ,{field: 'clicks', title: '点击量'}
+                        ,{field: 'zm', title: '字母'}
                         ,{field: 'sort', title: '排序'}
                         ,{field: 'created_at', title: '创建时间'}
                         ,{field: 'updated_at', title: '更新时间'}

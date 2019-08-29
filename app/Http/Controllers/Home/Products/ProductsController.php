@@ -12,14 +12,12 @@ class ProductsController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $modelCate = new ProductsCate();
-        view()->share('allCate',$modelCate->getCacheList());
     }
     public function index(Request $request)
     {
-        $arg = getArg(['cate','py','sort','page']);
+        $arg = getArg(['cate','zm','sort','page']);
         $cate = $arg['cate'];
-        $py = $arg['py'];
+        $zm = $arg['zm'];
         $sort = $arg['sort'];
         $page = $arg['page'];
 
@@ -27,10 +25,10 @@ class ProductsController extends Controller
 
         $cateInfo = $modelCate->getInfo($cate); //获取父类
         $fid = $cateInfo['id'];
-        $categorys = $this->navs[$fid]['children'];//获取父类下所有子类
+        $categorys = $this->nav[$fid]['children'];//获取父类下所有子类
 
-        if($py && !is_numeric($py)){
-            $info = $modelCate->getInfo($py);
+        if($zm && !is_numeric($zm)){
+            $info = $modelCate->getInfo($zm);
             $fid = $info['id'];
         }
 

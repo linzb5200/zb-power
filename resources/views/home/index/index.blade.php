@@ -64,25 +64,25 @@
 
 <div class="fly-main" style="overflow: hidden;">
 
-    @foreach($navs as $key => $nav)
-        @if($nav['recommend'] == 1)
+    @foreach($nav as $key => $nv)
+        @if($nv['recommend'] == 1)
     <div class="layui-tab layui-tab-brief">
         <ul class="layui-tab-title">
-            <li><h2 class="title">{{$nav['title']}}</h2></li>
+            <li><h2 class="title">{{$nv['title']}}</h2></li>
 
-            @foreach($nav['children'] as $child)
+            @foreach($nv['children'] as $child)
                 @if($child['recommend'] == 1)
-            <li><a href="/{{$nav['pinyin']}}/{{$child['pinyin']}}/">{{$child['title']}}</a></li>
+            <li><a href="/{{$nv['zm']}}/{{$child['zm']}}/">{{$child['title']}}</a></li>
                 @endif
             @endforeach
-            <li class="fr"><a href="/{{$nav['pinyin']}}/">查看更多 ></a></li>
+            <li class="fr"><a href="/{{$nv['zm']}}/">查看更多 ></a></li>
         </ul>
     </div>
 
     <ul class="fly-case-list">
 
-        @if(isset($hots[$nav['id']]))
-        @foreach($hots[$nav['id']] as $hot)
+        @if(isset($hots[$nv['id']]))
+        @foreach($hots[$nv['id']] as $hot)
         <li data-id="123">
             <div class="fly-case-img" href="{{$hot['url']}}" target="_blank">
                 <img src="{{ getImagePath($hot['thumb']) }}" alt="">

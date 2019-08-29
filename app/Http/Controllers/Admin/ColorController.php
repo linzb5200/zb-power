@@ -54,6 +54,8 @@ class ColorController extends Controller
             'sort'  => 'required|numeric'
         ]);
         if (Color::create($request->all())){
+            $model = new Color;
+            $model->zm();
             return redirect(route('admin.color'))->with(['status'=>'添加完成']);
         }
         return redirect(route('admin.color'))->with(['status'=>'系统错误']);
@@ -95,8 +97,9 @@ class ColorController extends Controller
             'name'  => 'required|string',
             'sort'  => 'required|numeric'
         ]);
-        $color = Color::findOrFail($id);
-        if ($color->update($request->only(['name','sort']))){
+        $model = Color::findOrFail($id);
+        if ($model->update($request->only(['name','sort']))){
+            $model->zm();
             return redirect(route('admin.color'))->with(['status'=>'更新成功']);
         }
         return redirect(route('admin.color'))->withErrors(['status'=>'系统错误']);
@@ -115,6 +118,8 @@ class ColorController extends Controller
             return response()->json(['code'=>1,'msg'=>'请选择删除项']);
         }
         if (Color::destroy($ids)){
+            $model = new Color;
+            $model->zm();
             return response()->json(['code'=>0,'msg'=>'删除成功']);
         }
         return response()->json(['code'=>1,'msg'=>'删除失败']);
