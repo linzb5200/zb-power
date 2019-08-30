@@ -551,7 +551,7 @@ function myRoute($key,$val='',$html = '')
     }
 
     if(empty($args['sort'])){
-        $args['sort'] = 1;
+        $args['sort'] = 0;
     }
     if(empty($args['page'])){
         $args['page'] = 1;
