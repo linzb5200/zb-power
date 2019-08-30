@@ -15,9 +15,6 @@ class ProductsController extends Controller
     }
     public function index(Request $request)
     {
-        $url = 'http://www.dev.lishengquan.com/ppt/f/g0000011.html?cate=ppt&zm=f&color=0&style=0&trade=g&soft=0&type=0&scale=0&sort=1&page=5';
-        $url = 'http://www.dev.lishengquan.com/ppt/4.html';
-//        myPageUrl($url);
 
         $arg = $this->myArg();
 
@@ -42,7 +39,7 @@ class ProductsController extends Controller
         //获取产品
         $model = new Products();
         $query = $model::query();
-        $ret = getMap($query,$map)->orderBy('id')->paginate(1);
+        $ret = getMap($query,$map)->orderBy('id')->paginate(20);
 
         $items = $ret->toArray()['data'];
 
