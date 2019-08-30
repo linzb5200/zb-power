@@ -34,6 +34,9 @@ class ProductsController extends Controller
             'ok' => [
                 'closed' => 0,
                 'cate_id' => ['in',explode(',',$childIds)]
+            ],
+            'no' => [
+                'title' => ['like','keywords'],
             ]
         ];
         //获取产品
