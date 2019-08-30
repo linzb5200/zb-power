@@ -543,7 +543,7 @@ function getZm($array)
 //产品列表页路由
 function myRoute($key,$val='',$html = '')
 {
-    $args = getArg(['cate','zm','trade','style','color','soft','type','scale','sort','page']);
+    $args = getArg(['cate','zm','trade','style','color','soft','type','scale','sort','page','clear']);
 
     $url = '/'.$args['cate'].'/'.$args['zm'].'/';
     if(empty($args['zm'])){
@@ -559,7 +559,11 @@ function myRoute($key,$val='',$html = '')
 
     foreach ($args as $k => $arg){
 
-        if($k != 'cate' && $k != 'zm'){
+        if($key == 'clear' && $val == 1 && in_array($k,['color','soft','type','scale','sort'])){
+            $arg = 0;
+        }
+
+        if($k != 'cate' && $k != 'zm' && $k != 'clear'){
 
             if(strstr($key,'all_')){
                 $key = substr($key , 4 );
@@ -574,6 +578,33 @@ function myRoute($key,$val='',$html = '')
     }
 
     $url .= $html;
+    return $url;
+
+}
+
+//产品列表页分页伪静态
+function myPageUrl($url = '')
+{
+
+    $arr     = parse_url($url);
+
+    $query = [];
+    if(isset($arr['query'])){
+        parse_str($arr['query'],$query);
+    }
+
+
+    if(isset($query['cate'])){
+        $query['cate'] = '/'.$query['cate']."/";
+    }
+    if(isset($query['zm'])){
+        $query['zm'] = $query['zm']."/";
+    }
+
+    $args = array_values($query);
+
+    $url = implode('',$args).'.html';
+
     return $url;
 
 }

@@ -20,17 +20,23 @@ Route::get('/','Home\IndexController@index')->name('home');
 Route::group(['namespace' => 'Home\Products'], function () {
 
 
-    Route::get('/{cate}/','ProductsController@index')->name('products.index')
+    Route::get('/{cate}/','ProductsController@index')->name('products.cate')
         ->where([ 'cate' => '^ppt|excel|word|resume|design']);
 
-    Route::get('/{cate}/{zm}/','ProductsController@index')->name('products.index')
+    Route::get('/{cate}/{page}.html','ProductsController@index')->name('products.cate3')
+        ->where([ 'cate' => '^ppt|excel|word|resume|design','page' => '[0-9+]']);
+
+    Route::get('/{cate}/{zm}/','ProductsController@index')->name('products.cate2')
         ->where([ 'cate' => '^ppt|excel|word|resume|design','zm' => '[a-z0-9]']);
 
     Route::get('/{cate}/{trade}{style}{color}{soft}{type}{scale}{sort}{page}.html','ProductsController@index')->name('products.index')
         ->where([ 'cate' => '^ppt|excel|word|resume|design','trade' => '[a-z0-9]','style' => '[a-z0-9]','color' => '[a-z0-9]','soft' => '[0-9]','type' => '[0-9]','scale' => '[0-9]','sort' => '[0-9]','page' => '[0-9]+']);
 
-    Route::get('/{cate}/{zm}/{trade}{style}{color}{soft}{type}{scale}{sort}{page}.html','ProductsController@index')->name('products.index')
+    Route::get('/{cate}/{zm}/{trade}{style}{color}{soft}{type}{scale}{sort}{page}.html','ProductsController@index')->name('products.index2')
         ->where([ 'cate' => '^ppt|excel|word|resume|design','zm' => '[a-z0-9]','trade' => '[a-z0-9]','style' => '[a-z0-9]','color' => '[a-z0-9]','soft' => '[0-9]','type' => '[0-9]','scale' => '[0-9]','sort' => '[0-9]','page' => '[0-9]+']);
+
+    Route::get('/{cate}/{zm}/{id}.html','ProductsController@show')->name('products.show')
+        ->where([ 'cate' => '^ppt|excel|word|resume|design','zm' => '[a-z0-9]','id' => '[0-9]+']);
 
 
     Route::post('/search','ProductsController@search')->name('products.search');

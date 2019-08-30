@@ -15,6 +15,9 @@ class ProductsController extends Controller
     }
     public function index(Request $request)
     {
+        $url = 'http://www.dev.lishengquan.com/ppt/f/g0000011.html?cate=ppt&zm=f&color=0&style=0&trade=g&soft=0&type=0&scale=0&sort=1&page=5';
+        $url = 'http://www.dev.lishengquan.com/ppt/4.html';
+//        myPageUrl($url);
 
         $arg = $this->myArg();
 
@@ -22,8 +25,6 @@ class ProductsController extends Controller
         $modelCate = new ProductsCate();
 
         $fid = $arg['cate']['id'];
-        $cateInfo = $arg['cate'];
-        $categorys = $arg['cate']['children'];//获取父类下所有子类
 
         $zm = $arg['zm'];
         if(!empty($zm)){
@@ -41,10 +42,14 @@ class ProductsController extends Controller
         //获取产品
         $model = new Products();
         $query = $model::query();
-        $ret = getMap($query,$map)->orderBy('id')->paginate(24)->toArray();
-        $items = $ret['data'];
+        $ret = getMap($query,$map)->orderBy('id')->paginate(1);
 
-        return view('home.products.index',compact(['categorys','cateInfo','items']));
+        $items = $ret->toArray()['data'];
+
+        $cate = $arg['cate'];
+        $categorys = $arg['cate']['children'];//获取父类下所有子类
+        $arg = getArg(['cate','zm','color','style','trade','soft','type','scale','sort','page','clear']);
+        return view('home.products.index',compact(['categorys','cate','items','ret','arg']));
     }
 
     public function search(Request $request)
