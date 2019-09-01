@@ -96,7 +96,7 @@
         <ul class="fly-case-list">
             @foreach($items as $item)
                 <li data-id="123">
-                    <div class="fly-case-img ahref" href="/{{$cate['zm']}}/{{$costCate[$item['cate_id']]['zm']}}/{{$item['id']}}.html" target="_blank" >
+                    <div class="fly-case-img ahref" href="{{route('products.show',['cate'=>$cate['zm'],'id'=>$item['id']]) }}" target="_blank" >
                         <img src="{{ getImagePath($item['thumb']) }}" alt="">
                         <div class="tool">
                             <cite class="layui-btn layui-btn-boss layui-btn-small">立即下载</cite>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
 
-                    <h2><a href="/{{$cate['zm']}}/{{$costCate[$item['cate_id']]['zm']}}/{{$item['id']}}" target="_blank">{{$item['title']}}</a></h2>
+                    <h2><a href="{{route('products.show',['cate'=>$cate['zm'],'id'=>$item['id']]) }}" target="_blank">{{$item['title']}}</a></h2>
                     <div class="fly-case-dash">
                         <button class="layui-btn layui-btn-transparent " data-type="download"><i class="fa fa-download"></i>{{$item['download']+$item['rand_download']}}</button>
                         <button class="layui-btn layui-btn-transparent fly-case-active" data-type="praise"><i class="layui-icon">&#xe600;</i>{{$item['fav']+$item['rand_fav']}}</button>

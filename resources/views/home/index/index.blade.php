@@ -84,10 +84,10 @@
         @if(isset($hots[$nv['id']]))
         @foreach($hots[$nv['id']] as $hot)
         <li data-id="123">
-            <div class="fly-case-img" href="{{$hot['url']}}" target="_blank">
+            <div class="fly-case-img" href="{{route('products.show2',['zm'=>$costCate[$hot['cate_id']]['zm'],'cate'=>$nv['zm'],'id'=>$hot['id']]) }}" target="_blank">
                 <img src="{{ getImagePath($hot['thumb']) }}" alt="">
                 <div class="tool">
-                    <cite class="layui-btn layui-btn-boss layui-btn-small" href="{{$hot['url']}}" target="_blank" >立即下载</cite>
+                    <cite class="layui-btn layui-btn-boss layui-btn-small" href="{{route('products.show2',['zm'=>$costCate[$hot['cate_id']]['zm'],'cate'=>$nv['zm'],'id'=>$hot['id']]) }}" target="_blank" >立即下载</cite>
                     <div class="btn">
                         <i class="iconfont icon-zan"></i>
                         <i class="layui-icon">&#xe600;</i>
@@ -95,7 +95,7 @@
                 </div>
             </div>
 
-            <h2><a href="{{$hot['url']}}" target="_blank">{{$hot['title']}}</a></h2>
+            <h2><a href="{{route('products.show2',['zm'=>$costCate[$hot['cate_id']]['zm'],'cate'=>$nv['zm'],'id'=>$hot['id']]) }}" target="_blank">{{$hot['title']}}</a></h2>
             <div class="fly-case-dash">
                 <button class="layui-btn layui-btn-transparent " data-type="download"><i class="fa fa-download"></i>{{$hot['download']+$hot['rand_download']}}
                 </button>

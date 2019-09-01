@@ -114,13 +114,6 @@ class Products extends Model
                     ->get()->toArray();
 
                 if($items){
-                    foreach ($items as &$item )
-                    {
-                        $cate = $children[$item['cate_id']];
-                        $item['pinyin_1'] = $top['pinyin'];
-                        $item['pinyin_2'] = $cate['pinyin'];
-                        $item['url'] = "/".$item['pinyin_1']."/".$item['pinyin_2']."/".$item['id'];
-                    }
                     $hots[$id] = $items;
                 }
 

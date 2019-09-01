@@ -35,8 +35,11 @@ Route::group(['namespace' => 'Home\Products'], function () {
     Route::get('/{cate}/{zm}/{trade}{style}{color}{soft}{type}{scale}{sort}{page}.html','ProductsController@index')->name('products.index2')
         ->where([ 'cate' => '^ppt|excel|word|resume|design','zm' => '[a-z0-9]','trade' => '[a-z0-9]','style' => '[a-z0-9]','color' => '[a-z0-9]','soft' => '[0-9]','type' => '[0-9]','scale' => '[0-9]','sort' => '[0-9]','page' => '[0-9]+']);
 
-    Route::get('/{cate}/{zm}/{id}.html','ProductsController@show')->name('products.show')
-        ->where([ 'cate' => '^ppt|excel|word|resume|design','zm' => '[a-z0-9]','id' => '[0-9]+']);
+    Route::get('/{cate}/{id}.html','ProductsController@show')->name('products.show')
+        ->where([ 'cate' => '^ppt|excel|word|resume|design','id' => '[0-9]+']);
+
+    Route::get('/{zm}{cate}/{id}.html','ProductsController@show')->name('products.show2')
+        ->where([ 'zm' => '[a-z0-9]','cate' => '^ppt|excel|word|resume|design','id' => '[0-9]+']);
 
 
     Route::post('/search','ProductsController@search')->name('products.search');
