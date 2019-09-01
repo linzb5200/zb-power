@@ -31,6 +31,8 @@ a:hover{color:#ff8a00!important;text-decoration:none;-webkit-transition:all line
 .layui-btn-transparent{background: none; color: #000;}
 .layui-btn-transparent:hover{color: #000;}
 .layui-layer-close:hover{transform: rotate(180deg);}
+.layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this{background: #ff8a00!important;}
+.layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this:hover{color: white!important;}
 /* 图标 */
 
 @font-face {font-family: "layui-icon-fly";
