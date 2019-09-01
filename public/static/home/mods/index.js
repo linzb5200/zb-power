@@ -64,13 +64,25 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
       options = options || {};
 
       return $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         type: options.type || 'post',
         dataType: options.dataType || 'json',
         data: data,
         url: url,
         success: function(res){
-          if(res.status === 0) {
+
+          if(res.status === 0 || res.status === 1000) {
             success && success(res);
+          }else if (res.status == 422) {
+              if($.isPlainObject(res.errors)) {
+                  $.each(res.errors, function (k, v) {
+                      if(v[0]) layer.msg(v[0]);
+                      return false;
+                  });
+              }
+              return false;
           } else {
             layer.msg(res.msg || res.code, {shift: 6});
             options.error && options.error();

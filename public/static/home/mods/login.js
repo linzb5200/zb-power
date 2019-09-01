@@ -80,7 +80,7 @@ layui.define(['laypage', 'fly'], function(exports){
                     ,'<li class="layui-form-item">'
                     ,'<label class="layui-form-label send">获取</label>'
                     ,'<div class="layui-input-block">'
-                    ,'<input required name="code" lay-verify="required" placeholder="手机验证码" value="" class="layui-input" autocomplete="off">'
+                    ,'<input required name="captcha" lay-verify="required" placeholder="手机验证码" value="" class="layui-input" autocomplete="off">'
                     ,'</div>'
                     ,'</li>'
                     ,'<li class="layui-form-item">'
@@ -97,13 +97,23 @@ layui.define(['laypage', 'fly'], function(exports){
                     ,'</li>'
                     ,'</ul>'].join('')
                 ,success: function(layero, index){
+                    var input = layero.find('input[name="mobile"]');
+                    input.focus();
 
                     layero.find('.send').on('click', function() {
                         return layer.msg('发送验证码');
                     });
 
                     layero.find('.login').on('click', function() {
-                        return layer.msg('登录');
+                        var mobile = layero.find('input[name="mobile"]').val();
+                        var captcha = layero.find('input[name="captcha"]').val();
+                        fly.json('/user/reg', {mobile:mobile,captcha:captcha}, function(res){
+                            if(res.status == 1000){
+                                layer.msg(res.msg);
+                                location.href = '/user/index/';
+                            }
+                        });
+                        return false;
                     });
 
                     layero.find('.other').on('click', function() {

@@ -79,4 +79,30 @@ class Controller extends BaseController
             'msg' => '删除失败',
         ]);
     }
+
+
+    /**
+     * 函数说明
+     *
+     * @param int $code
+     * @param $data
+     * @param string $msg
+     * @return void
+     */
+    protected function response($status = 1000, $data = null, $msg = '')
+    {
+
+        $response = json_encode([
+            'status' => $status,
+            'msg'  => $msg,
+            'data' => $data,
+        ]);
+        header('Content-Type:application/json;charset=utf-8');
+        // 跨域
+        if (request()->input('jsonp')) {
+            $response = request()->input('callback') . '(' . $response . ')';
+        }
+
+        exit($response);
+    }
 }

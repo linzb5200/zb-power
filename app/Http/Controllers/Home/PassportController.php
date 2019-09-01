@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PassportController extends Controller
 {
@@ -39,6 +40,34 @@ class PassportController extends Controller
             $this->guard()->login($member);
         }
         return back()->with(['status'=>'系统错误']);
+    }
+    //手机注册
+    public function reg(Request $request)
+    {
+        $input = $this->validate($request,[
+            'captcha' => 'required',
+            'mobile' => 'required|numeric|regex:/^1[3456789][0-9]{9}$/',
+        ],[
+            'captcha.required' => '请输入手机验证码',
+            'mobile.required' => '请输入手机号码',
+            'mobile.numeric' => '请输入正确的手机号',
+            'mobile.regex' => '请输入正确的手机号',
+        ]);
+
+        $info = DB::table('members')->where('mobile','=',$input['mobile'])->first();
+        if($info){
+            $this->guard()->loginUsingId($info->id,true);
+            $this->response(1000,[],'登录成功');
+        }
+        $input['password'] = bcrypt('123456');
+        $input['uuid'] = \Faker\Provider\Uuid::uuid();
+        unset($input['captcha']);
+
+        if ($member = Member::create($input)){
+            $this->guard()->login($member,true);
+            $this->response(1000,[],'登录成功');
+        }
+        $this->response(1099,[],'登录失败');
     }
 
     //登录表单
