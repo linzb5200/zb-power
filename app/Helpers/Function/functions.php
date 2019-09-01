@@ -204,7 +204,14 @@ function getMap($query, $temp)
 function getArg($args){
     $arr = [];
     foreach ($args as $arg){
-        $arr[$arg] = request()->route($arg);
+        $v = request()->route($arg);
+        if($v == null && $v != '0' && in_array($arg,['color','style','trade','soft','type','scale'])){
+            $v = '0';
+        }
+        if($v == null && $v != '0' && in_array($arg,['sort','page'])){
+            $v = '1';
+        }
+        $arr[$arg] = $v;
     }
     return $arr;
 }
@@ -538,48 +545,6 @@ function getZm($array)
         $arr['zm'] = $zm[$k];
     }
     return $array;
-}
-
-//产品列表页路由
-function myRoute($key,$val='',$html = '')
-{
-    $args = getArg(['cate','zm','trade','style','color','soft','type','scale','sort','page','clear']);
-
-    $url = '/'.$args['cate'].'/'.$args['zm'].'/';
-    if(empty($args['zm'])){
-        $url = '/'.$args['cate'].'/';
-    }
-
-    if(empty($args['sort'])){
-        $args['sort'] = 0;
-    }
-    if(empty($args['page'])){
-        $args['page'] = 1;
-    }
-
-    foreach ($args as $k => $arg){
-
-        if($key == 'clear' && $val == 1 && in_array($k,['color','soft','type','scale','sort'])){
-            $arg = 0;
-        }
-
-        if($k != 'cate' && $k != 'zm' && $k != 'clear'){
-
-            if(strstr($key,'all_')){
-                $key = substr($key , 4 );
-            }
-
-            if($key == $k ){
-                $url .= $val=='' ? 0 : $val;
-            }else{
-                $url .= empty($arg) || $arg=='' ? 0 : $arg;
-            }
-        }
-    }
-
-    $url .= $html;
-    return $url;
-
 }
 
 //产品列表页分页伪静态

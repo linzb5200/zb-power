@@ -46,10 +46,18 @@ class ProductsController extends Controller
 
         $items = $ret->toArray()['data'];
 
+
+
         $cate = $arg['cate'];
         $categorys = $arg['cate']['children'];//获取父类下所有子类
         $arg = getArg(['cate','zm','color','style','trade','soft','type','scale','sort','page','clear']);
-        return view('home.products.index',compact(['categorys','cate','items','ret','arg']));
+        $otherAttr = $model->otherAttr;//获取其他属性
+
+        $tpl = 'home.products.index2';
+        if($arg['zm'] == null){
+            $tpl = 'home.products.index';
+        }
+        return view($tpl,compact(['categorys','cate','items','ret','arg','otherAttr']));
     }
 
     public function search(Request $request)
