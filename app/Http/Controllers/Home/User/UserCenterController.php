@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Home\Member;
-
-use App\Models\Member;
+namespace App\Http\Controllers\Home\User;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Request;
 
 
-class MemberCenterController extends Controller
+class UserCenterController extends Controller
 {
     use AuthenticatesUsers;
     public $member;
@@ -24,11 +21,6 @@ class MemberCenterController extends Controller
         $this->middleware(function ($request, $next) {
             $this->member = auth('member')->user();
             view()->share('member',$this->member);
-
-            $site = [
-                'curl' => Request::getRequestUri()
-            ];
-            view()->share('site',$site);
 
             return $next($request);
         });

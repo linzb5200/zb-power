@@ -71,39 +71,11 @@ class PassportController extends Controller
     }
 
     //登录表单
-    public function showLoginForm()
-    {
-        return view('home.passport.login');
-    }
-    public function showFloatLoginForm()
-    {
-        return view('home.passport.float_login');
-    }
+//    public function showLoginForm()
+//    {
+//        return view('home.passport.login');
+//    }
 
-    public function floatLogin(Request $request)
-    {
-        if($request->method() == 'POST'){
-
-            $this->validateLogin($request);
-            $input = $request->all();
-            $remember = isset($input['remember']) ? 1 : 0;
-
-            if (!$this->guard()->attempt(['name' => $input['name'], 'password' => $input['password']],$remember)) {
-                return response()->json([
-                    'status' => 0,
-                    'msg' => '用户名或密码错误',
-                    'data' => $input,
-                ]);
-            }else{
-                return response()->json([
-                    'status' => 1,
-                    'msg' => '登录成功',
-                    'url' => route('home.member'),
-                ]);
-            }
-        }
-
-    }
     public function redirectTo()
     {
         return route('home.member');

@@ -109,8 +109,7 @@ layui.define(['laypage', 'fly'], function(exports){
                         var captcha = layero.find('input[name="captcha"]').val();
                         fly.json('/user/reg', {mobile:mobile,captcha:captcha}, function(res){
                             if(res.status == 1000){
-                                layer.msg(res.msg);
-                                location.href = '/user/index/';
+                                location.href = '/user/';
                             }
                         });
                         return false;

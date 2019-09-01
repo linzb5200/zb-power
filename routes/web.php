@@ -69,9 +69,9 @@ Route::group(['namespace'=>'Home','prefix'=>'user'],function (){
     Route::post('floatLogin', 'PassportController@floatLogin')->name('home.user.floatLogin');
 });
 //会员-需要认证
-Route::group(['namespace'=>'Home','prefix'=>'member','middleware'=>'member'],function (){
+Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],function (){
     //个人中心
-    Route::get('/','Member\MemberController@info')->name('home.member');
-    Route::get('info','Member\MemberController@info')->name('home.member.info');
+    Route::get('/','User\UserController@index')->name('home.user');
+    Route::get('info','User\UserController@info')->name('home.user.info');
 
 });
