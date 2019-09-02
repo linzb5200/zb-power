@@ -54,24 +54,30 @@ Route::group(['namespace' => 'Home\Products'], function () {
 
 });
 
+//博客-不需要认证
+Route::group(['namespace'=>'Home','prefix'=>'blog'],function (){
+    //个人主页
+    Route::get('/{id}.html', 'Blog\BlogController@index')->name('home.blog');
+});
 //会员-不需要认证
 Route::group(['namespace'=>'Home','prefix'=>'user'],function (){
     //注册
     Route::get('register', 'PassportController@showRegisterForm')->name('home.user.showRegisterForm');
     Route::post('register', 'PassportController@register')->name('home.user.register');
-    Route::post('reg', 'PassportController@reg')->name('home.user.reg');
+    Route::post('reg', 'PassportController@floatLogin')->name('home.user.reg');
     //登录
     Route::get('login', 'PassportController@showLoginForm')->name('home.user.showLoginForm');
     Route::post('login', 'PassportController@login')->name('home.user.login');
     Route::get('logout', 'PassportController@logout')->name('home.user.logout');
     //弹窗登录
-    Route::get('floatLogin', 'PassportController@showFloatLoginForm')->name('home.user.showFloatLoginForm');
     Route::post('floatLogin', 'PassportController@floatLogin')->name('home.user.floatLogin');
 });
 //会员-需要认证
 Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],function (){
     //个人中心
     Route::get('/','User\UserController@index')->name('home.user');
-    Route::get('info','User\UserController@info')->name('home.user.info');
+    Route::get('profile','User\UserController@profile')->name('home.user.profile');
+    Route::get('finance','User\UserController@finance')->name('home.user.finance');
+    Route::get('content','User\UserController@content')->name('home.user.content');
 
 });

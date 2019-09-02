@@ -13,12 +13,27 @@ class UserController extends UserCenterController
     {
         parent::__construct();
         $this->middleware('guest:member')
-            ->except(['index']);
+            ->except(['index','profile','finance','content']);
     }
 
     public function index()
     {
         return view('home.user.index');
+    }
+
+    public function profile()
+    {
+        return view('home.user.profile');
+    }
+
+    public function finance()
+    {
+        return view('home.user.finance');
+    }
+
+    public function content()
+    {
+        return view('home.user.content');
     }
 
 

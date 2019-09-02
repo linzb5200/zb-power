@@ -53,6 +53,9 @@ class Controller extends BaseController
         return $tree;
     }
 
+    /**
+     * 处理删除
+     */
     public function dels($model,$deleted_at=false)
     {
         if($deleted_at){
@@ -91,8 +94,7 @@ class Controller extends BaseController
      */
     protected function response($status = 1000, $data = null, $msg = '')
     {
-
-        $response = json_encode([
+        $response = response()->json([
             'status' => $status,
             'msg'  => $msg,
             'data' => $data,

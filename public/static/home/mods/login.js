@@ -74,13 +74,13 @@ layui.define(['laypage', 'fly'], function(exports){
                 ,content: ['<ul class="layui-row fly-login-area" lay-filter="mobileLogin" style="margin: 50px 20px;">'
                     ,'<li class="layui-form-item">'
                     ,'<div class="layui-input-block">'
-                    ,'<input required name="mobile" lay-verify="required" placeholder="手机号" value="" class="layui-input" autocomplete="off">'
+                    ,'<input required name="mobile" lay-verify="required" placeholder="手机号" value="17689218655" class="layui-input" autocomplete="off">'
                     ,'</div>'
                     ,'</li>'
                     ,'<li class="layui-form-item">'
                     ,'<label class="layui-form-label send">获取</label>'
                     ,'<div class="layui-input-block">'
-                    ,'<input required name="captcha" lay-verify="required" placeholder="手机验证码" value="" class="layui-input" autocomplete="off">'
+                    ,'<input required name="captcha" lay-verify="required" placeholder="手机验证码" value="23332" class="layui-input" autocomplete="off">'
                     ,'</div>'
                     ,'</li>'
                     ,'<li class="layui-form-item">'
@@ -107,9 +107,9 @@ layui.define(['laypage', 'fly'], function(exports){
                     layero.find('.login').on('click', function() {
                         var mobile = layero.find('input[name="mobile"]').val();
                         var captcha = layero.find('input[name="captcha"]').val();
-                        fly.json('/user/reg', {mobile:mobile,captcha:captcha}, function(res){
+                        fly.json('/user/floatLogin', {mobile:mobile,captcha:captcha}, function(res){
                             if(res.status == 1000){
-                                location.href = '/user/';
+                                location.href = res.data;
                             }
                         });
                         return false;
