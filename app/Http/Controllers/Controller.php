@@ -53,9 +53,6 @@ class Controller extends BaseController
         return $tree;
     }
 
-    /**
-     * 处理删除
-     */
     public function dels($model,$deleted_at=false)
     {
         if($deleted_at){
@@ -84,27 +81,4 @@ class Controller extends BaseController
     }
 
 
-    /**
-     * 函数说明
-     *
-     * @param int $code
-     * @param $data
-     * @param string $msg
-     * @return void
-     */
-    protected function response($status = 1000, $data = null, $msg = '')
-    {
-        $response = response()->json([
-            'status' => $status,
-            'msg'  => $msg,
-            'data' => $data,
-        ]);
-        header('Content-Type:application/json;charset=utf-8');
-        // 跨域
-        if (request()->input('jsonp')) {
-            $response = request()->input('callback') . '(' . $response . ')';
-        }
-
-        exit($response);
-    }
 }

@@ -108,7 +108,7 @@ layui.define(['laypage', 'fly'], function(exports){
                         var mobile = layero.find('input[name="mobile"]').val();
                         var captcha = layero.find('input[name="captcha"]').val();
                         fly.json('/user/floatLogin', {mobile:mobile,captcha:captcha}, function(res){
-                            if(res.status == 1000){
+                            if(res.status == 0){
                                 location.href = res.data;
                             }
                         });
