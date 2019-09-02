@@ -76,7 +76,8 @@ Route::group(['namespace'=>'Home','prefix'=>'user'],function (){
 Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],function (){
     //个人中心
     Route::get('/','User\UserController@index')->name('home.user');
-    Route::get('profile','User\UserController@profile')->name('home.user.profile');
+    Route::post('repass','User\UserController@repass')->name('home.user.repass');
+    Route::any('profile','User\UserController@profile')->name('home.user.profile');
     Route::get('finance','User\UserController@finance')->name('home.user.finance');
     Route::get('content','User\UserController@content')->name('home.user.content');
 

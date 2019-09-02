@@ -29,6 +29,7 @@
 <script src="{{ asset('static/home/layui/layui.js') }}"></script>
 <script src="{{ asset('static/plugins/jquery/3.4.1/jquery.min.js') }}"></script>
 <script src="{{ asset('static/home/mods/global.js') }}"></script>
+<script src="{{ asset('static/home/mods/user.js') }}"></script>
 
 </body>
 </html>
