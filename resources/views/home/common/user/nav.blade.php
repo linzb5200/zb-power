@@ -16,7 +16,7 @@
     <li class="layui-nav-item @if(in_array($site['curl'],['/user/profile'])) layui-this @endif">
         <a href="{{route('home.user.profile')}}">
             <i class="layui-icon">&#xe620;</i>
-            基本设置
+            个人资料
         </a>
     </li>
     <li class="layui-nav-item @if(in_array($site['curl'],['/user/finance'])) layui-this @endif">
