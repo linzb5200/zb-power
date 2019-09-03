@@ -1,14 +1,8 @@
 
-layui.use(['layer', 'laytpl', 'form', 'element', 'upload', 'util','login'], function(exports){
+layui.use(['layer', 'login'], function(exports){
 
     var $ = layui.jquery
-        ,layer = layui.layer
-        ,laytpl = layui.laytpl
-        ,form = layui.form
-        ,element = layui.element
-        ,upload = layui.upload
         ,login = layui.login
-        ,util = layui.util;
 
 
     //banner
@@ -30,16 +24,6 @@ layui.use(['layer', 'laytpl', 'form', 'element', 'upload', 'util','login'], func
         })
 
     }
-
-    if($('.ahref').length > 0){
-        $('.ahref').click(function () {
-            var href = $(this).attr('href');
-            var target = $(this).attr('target');
-            if(href != '' && target == '_blank') window.open(href);
-            if(href != '') location.href=href;
-        });
-    }
-
 
 });
 

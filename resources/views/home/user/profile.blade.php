@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="layui-form layui-form-pane layui-tab-item">
-                    <form action="{{route('home.user.repass')}}" method="post">
+                    <form action="{{route('home.user.repass')}}" method="post" id="set-repass">
                         {{ csrf_field() }}
                         <div class="layui-form-item">
                             <label for="L_nowpass" class="layui-form-label">当前密码</label>
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <button class="layui-btn" key="set-repass" lay-filter="*" lay-submit>确认修改</button>
+                            <button class="layui-btn" key="set-repass" lay-filter="set-repass" lay-submit>确认修改</button>
                         </div>
                     </form>
                 </div>
@@ -98,5 +98,24 @@
     </div>
 @endsection
 @section('script')
+    <script>
+
+        layui.use(['layer', 'form', 'fly'], function(){
+
+            var $ = layui.jquery
+                ,form = layui.form
+                ,fly = layui.fly;
+
+            //表单提交
+            form.on('submit(set-repass)', function(data){
+                var action = $(data.form).attr('action'), button = $(data.elem);
+                console.log(action);
+                alert(action);
+
+                return false;
+            });
+
+        });
+    </script>
 
 @endsection
