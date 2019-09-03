@@ -12,7 +12,7 @@
             </ul>
             <div class="layui-tab-content" style="padding: 20px 0;">
                 <div class="layui-form layui-form-pane layui-tab-item layui-show">
-                    <form method="post">
+                    <form method="post" id="F_mine">
                         <div class="layui-form-item">
                             <label for="L_email" class="layui-form-label">手机号</label>
                             <div class="layui-input-inline">
@@ -27,8 +27,9 @@
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
+                            <button class="layui-btn" key="F_mine" lay-filter="F_mine" lay-submit>确认修改</button>
                         </div>
+                    </form>
                 </div>
 
                 <div class="layui-form layui-form-pane layui-tab-item">
@@ -45,7 +46,7 @@
                 </div>
 
                 <div class="layui-form layui-form-pane layui-tab-item">
-                    <form action="{{route('home.user.repass')}}" method="post" id="set-repass">
+                    <form action="{{route('home.user.repass')}}" method="post" id="F_repass">
                         {{ csrf_field() }}
                         <div class="layui-form-item">
                             <label for="L_nowpass" class="layui-form-label">当前密码</label>
@@ -67,7 +68,7 @@
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <button class="layui-btn" key="set-repass" lay-filter="set-repass" lay-submit>确认修改</button>
+                            <button class="layui-btn" key="F_repass" lay-filter="F_repass" lay-submit>确认修改</button>
                         </div>
                     </form>
                 </div>
@@ -98,24 +99,5 @@
     </div>
 @endsection
 @section('script')
-    <script>
-
-        layui.use(['layer', 'form', 'fly'], function(){
-
-            var $ = layui.jquery
-                ,form = layui.form
-                ,fly = layui.fly;
-
-            //表单提交
-            form.on('submit(set-repass)', function(data){
-                var action = $(data.form).attr('action'), button = $(data.elem);
-                console.log(action);
-                alert(action);
-
-                return false;
-            });
-
-        });
-    </script>
 
 @endsection
