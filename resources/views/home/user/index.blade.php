@@ -16,9 +16,9 @@
                 <div class="fly-panel fly-panel-border">
                     <div class="fly-panel-title"> 我的会员信息</div>
                     <div class="fly-panel-main layui-text" style="padding: 18px 15px; height: 50px; line-height: 26px;">
-                        <p> 您的财富经验值：<span style="padding-right: 5px; color: #FF5722;">￥0</span>金币 <a href="/order/bill?itemid=16" target="_blank" class="layui-btn layui-btn-warm layui-btn-xs">充值</a>  </p>
+                        <p> 您拥有金币：<span style="padding-right: 5px; color: #FF5722;">￥110 金币</span> <a href="/order/bill?itemid=16" target="_blank" class="layui-btn layui-btn-warm layui-btn-xs">充值</a>  </p>
 
-                        <p> <span style="padding-right: 20px;">您当前为：非 VIP</span> 您拥有飞吻：<span style="color: #FF7200; padding-right: 5px;">110 飞吻</span> </p>
+                        <p> <span style="padding-right: 20px;">您当前为：非 VIP</span> </p>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="fly-panel-main fly-signin-main">
                         <button class="layui-btn layui-btn-danger" id="LAY_signin">今日签到</button>
-                        <span>可获得<cite>5</cite>飞吻</span>
+                        <span>可获得<cite>￥5</cite>金币</span>
                     </div>
                 </div>
             </div>
