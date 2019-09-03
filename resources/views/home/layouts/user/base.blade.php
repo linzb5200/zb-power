@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="http://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="{{asset('static/home/layui/css/layui.css')}}">
     <link rel="stylesheet" href="{{asset('static/home/css/global.css')}}">
+    <link rel="stylesheet" href="{{asset('static/home/css/user.css')}}">
 </head>
 <body>
 

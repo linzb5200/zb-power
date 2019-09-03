@@ -8,26 +8,53 @@
                 <li class="layui-this" lay-id="info">我的资料</li>
                 <li lay-id="avatar">头像</li>
                 <li lay-id="pass">密码</li>
-                <li lay-id="bind">帐号绑定</li>
             </ul>
             <div class="layui-tab-content" style="padding: 20px 0;">
                 <div class="layui-form layui-form-pane layui-tab-item layui-show">
-                    <form method="post" id="F_mine">
+                    <form method="post" id="F_profile">
                         <div class="layui-form-item">
-                            <label for="L_email" class="layui-form-label">手机号</label>
+                            <label for="info_nickname" class="layui-form-label">昵称</label>
                             <div class="layui-input-inline">
-                                <input type="text" id="L_mobile" name="mobile" lay-verify="mobile" autocomplete="off" value="" class="layui-input">
+                                <input type="text" id="info_nickname" name="nickname" required lay-verify="nickname" autocomplete="off" value="{{ auth('member')->user()->nickname }}" class="layui-input" readonly>
                             </div>
-                            <div class="layui-form-mid layui-word-aux">如果您在手机已激活的情况下，变更了手机，需<a href="activate.html" style="font-size: 12px; color: #4f99cf;">重新验证手机</a>。</div>
+                            <div class="layui-form-mid layui-word-aux"><a href="javascript:;" class="edit_nickname" style="font-size: 12px; color: #4f99cf;">更换昵称</a></div>
                         </div>
-                        <div class="layui-form-item layui-form-text">
+                        <div class="layui-form-item">
+                            <label for="info_phone" class="layui-form-label">手机</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="info_phone" name="mobile" required lay-verify="mobile" autocomplete="off" value="{{ auth('member')->user()->mobile }}" class="layui-input" readonly>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux"><a href="javascript:;" class="edit_phone" style="font-size: 12px; color: #4f99cf;">更换手机</a></div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="info_email" class="layui-form-label">邮箱</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="info_email" name="email" value="{{ auth('member')->user()->email }}" required lay-verify="email" autocomplete="off" class="layui-input" readonly>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux"><a href="javascript:;" class="edit_email" style="font-size: 12px; color: #4f99cf;">设置邮箱</a></div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="info_qq" class="layui-form-label">QQ</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="info_qq" name="qq" required lay-verify="qq" autocomplete="off" value="" class="layui-input" readonly>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux"><a href="javascript:;" class="bind_qr" style="font-size: 12px; color: #4f99cf;">绑定QQ帐号</a>，QQ快速登录。</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="info_wechat" class="layui-form-label">微信号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="info_wechat" name="wechat" required lay-verify="wechat" autocomplete="off" value="" class="layui-input" readonly>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux"><a href="javascript:;" class="bind_qr" style="font-size: 12px; color: #4f99cf;">绑定微信号</a>，扫码微信登录。</div>
+                        </div>
+                        <div class="layui-form-item layui-form-text" hidden>
                             <label for="L_sign" class="layui-form-label">签名</label>
                             <div class="layui-input-block">
                                 <textarea placeholder="随便写些什么刷下存在感" id="L_sign"  name="sign" autocomplete="off" class="layui-textarea" style="height: 80px;"></textarea>
                             </div>
                         </div>
-                        <div class="layui-form-item">
-                            <button class="layui-btn" key="F_mine" lay-filter="F_mine" lay-submit>确认修改</button>
+                        <div class="layui-form-item" hidden>
+                            <button class="layui-btn" key="" lay-filter="F_profile" lay-submit>确认修改</button>
                         </div>
                     </form>
                 </div>
@@ -46,8 +73,7 @@
                 </div>
 
                 <div class="layui-form layui-form-pane layui-tab-item">
-                    <form action="{{route('home.user.repass')}}" method="post" id="F_repass">
-                        {{ csrf_field() }}
+                    <form action="{{route('home.user.pwd')}}" method="post">
                         <div class="layui-form-item">
                             <label for="L_nowpass" class="layui-form-label">当前密码</label>
                             <div class="layui-input-inline">
@@ -68,31 +94,12 @@
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <button class="layui-btn" key="F_repass" lay-filter="F_repass" lay-submit>确认修改</button>
+                            <button class="layui-btn" key="" lay-filter="F_repass" lay-submit>确认修改</button>
                         </div>
                     </form>
                 </div>
 
-                <div class="layui-form layui-form-pane layui-tab-item">
-                    <ul class="app-bind">
-                        <li class="fly-msg app-havebind">
-                            <i class="iconfont icon-qq"></i>
-                            <span>已成功绑定，您可以使用QQ帐号直接登录Fly社区，当然，您也可以</span>
-                            <a href="javascript:;" class="acc-unbind" type="qq_id">解除绑定</a>
 
-                            <!-- <a href="" onclick="layer.msg('正在绑定微博QQ', {icon:16, shade: 0.1, time:0})" class="acc-bind" type="qq_id">立即绑定</a>
-                            <span>，即可使用QQ帐号登录Fly社区</span> -->
-                        </li>
-                        <li class="fly-msg">
-                            <i class="iconfont icon-weibo"></i>
-                            <!-- <span>已成功绑定，您可以使用微博直接登录Fly社区，当然，您也可以</span>
-                            <a href="javascript:;" class="acc-unbind" type="weibo_id">解除绑定</a> -->
-
-                            <a href="" class="acc-weibo" type="weibo_id"  onclick="layer.msg('正在绑定微博', {icon:16, shade: 0.1, time:0})" >立即绑定</a>
-                            <span>，即可使用微博帐号登录Fly社区</span>
-                        </li>
-                    </ul>
-                </div>
             </div>
 
         </div>

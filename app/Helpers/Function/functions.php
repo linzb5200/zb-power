@@ -312,9 +312,9 @@ function sendMailer($to, $subject, $body)
         $mail->AltBody = '邮件客户端不支持HTML';
 
         $mail->send();
-        return ['status'=>1,'msg'=>'邮件发送成功'];
+        return ['status'=>0,'msg'=>'邮箱验证码已发送成功，请登录邮箱查看'];
     } catch (Exception $e) {
-        return ['status'=>0,'msg'=>'邮件发送失败'. $mail->ErrorInfo];
+        return ['status'=>1099,'msg'=>'邮件发送失败'. $mail->ErrorInfo];
     }
 }
 

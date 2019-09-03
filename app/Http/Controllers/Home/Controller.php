@@ -7,9 +7,12 @@ use App\Models\Style;
 use App\Models\Trades;
 use App\Models\Products\ProductsCate;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class Controller extends BaseController
 {
+    use ValidatesRequests;
+
     protected $user;
     protected $settings;
     protected $nav;

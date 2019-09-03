@@ -59,6 +59,7 @@ Route::group(['namespace'=>'Home','prefix'=>'blog'],function (){
     //个人主页
     Route::get('/{id}.html', 'Blog\BlogController@index')->name('home.blog');
 });
+
 //会员-不需要认证
 Route::group(['namespace'=>'Home','prefix'=>'user'],function (){
     //注册
@@ -77,8 +78,18 @@ Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],funct
     //个人中心
     Route::get('/','User\UserController@index')->name('home.user');
     Route::post('repass','User\UserController@repass')->name('home.user.repass');
-    Route::any('profile','User\UserController@profile')->name('home.user.profile');
+    Route::get('profile','User\UserController@profile')->name('home.user.profile');
     Route::get('finance','User\UserController@finance')->name('home.user.finance');
     Route::get('content','User\UserController@content')->name('home.user.content');
+    //修改资料
+    Route::post('pwd','User\AjaxController@pwd')->name('home.user.pwd');
+    Route::post('nickname','User\AjaxController@nickname')->name('home.user.nickname');
+    Route::post('validatephone','User\AjaxController@validatephone')->name('home.user.validatephone');
+    Route::post('changephone','User\AjaxController@changephone')->name('home.user.changephone');
+    Route::post('validateemail','User\AjaxController@validateemail')->name('home.user.validateemail');
+    Route::post('changeemail','User\AjaxController@changeemail')->name('home.user.changeemail');
+    Route::post('bindqq','User\AjaxController@bind_qq')->name('home.user.bind_qq');
+    Route::post('unbindqq','User\AjaxController@unbind_qq')->name('home.user.unbind_qq');
+    Route::post('senddx', 'User\AjaxController@senddx')->name('home.user.senddx');
 
 });

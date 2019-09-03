@@ -54,6 +54,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
     //Ajax
     json: function(url, data, success, options){
       var that = this, type = typeof data === 'function';
+      var loading = layer.load(2, {shade: [.2,'#000']});
       
       if(type){
         options = success
@@ -72,7 +73,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
         data: data,
         url: url,
         success: function(res){
-
+          layer.close(loading);
           if(res.status === 0 || res.status === 1000) {
             success && success(res);
           }else if (res.status == 422) {
@@ -88,6 +89,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
             options.error && options.error();
           }
         }, error: function(e){
+          layer.close(loading);
           layer.msg('请求异常，请重试', {shift: 6});
           options.error && options.error(e);
         }
