@@ -19,8 +19,8 @@
             个人资料
         </a>
     </li>
-    <li class="layui-nav-item @if(in_array($site['curl'],['/user/finance'])) layui-this @endif">
-        <a href="{{route('home.user.finance')}}">
+    <li class="layui-nav-item @if(in_array($site['curl'],['/user/orders'])) layui-this @endif">
+        <a href="{{route('home.user.orders')}}">
             <i class="layui-icon">&#xe65e;</i>
             财务管理
         </a>

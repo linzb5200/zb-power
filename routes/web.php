@@ -79,7 +79,7 @@ Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],funct
     Route::get('/','User\UserController@index')->name('home.user');
     Route::post('repass','User\UserController@repass')->name('home.user.repass');
     Route::get('profile','User\UserController@profile')->name('home.user.profile');
-    Route::get('finance','User\UserController@finance')->name('home.user.finance');
+    Route::get('orders','User\UserController@orders')->name('home.user.orders');
     Route::get('blog','User\UserController@blog')->name('home.user.blog');
     //修改资料
     Route::post('pwd','User\AjaxController@pwd')->name('home.user.pwd');
