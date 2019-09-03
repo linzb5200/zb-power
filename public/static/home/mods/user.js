@@ -48,7 +48,7 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
     form.on('submit(F_repass)', function(data){
         fly.json('/user/pwd/', data.field, function(res){
             if(res.status === 0){
-                layer.msg(res.msg, {icon: 1});
+                layer.msg(res.msg, {icon: 1,time: 1E3}, function(){location.reload();})
             }
         });
         return false;

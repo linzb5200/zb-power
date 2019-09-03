@@ -5,9 +5,9 @@
 
         <div class="layui-tab layui-tab-brief" lay-filter="user">
             <ul class="layui-tab-title" id="LAY_mine">
-                <li data-type="mine-tpl" lay-id="index" class="layui-this">我的模板（<span>89</span>）</li>
-                <li data-type="mine-fav" lay-id="fav" >我的收藏（<span>69</span>）</li>
+                <li data-type="mine-tpl" lay-id="index" class="layui-this">我的上传（<span>89</span>）</li>
                 <li data-type="mine-down" lay-id="down">我的下载 （<span>16</span>）</li>
+                <li data-type="mine-fav" lay-id="fav" >我的收藏（<span>69</span>）</li>
             </ul>
             <div class="layui-tab-content" style="padding: 20px 0;">
                 <div class="layui-tab-item layui-show">
