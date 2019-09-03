@@ -35,9 +35,11 @@
                 </a>
                 <dl class="layui-nav-child">
 
-                    <dd><a href="{{route('home.blog',['id'=>auth()->guard('member')->user()->id]) }}" title="" >我的博客</a></dd>
-                    <dd><a href="{{route('home.user')}}" title="" >个人中心</a></dd>
+                    <dd><a href="{{route('home.user')}}" title="" >用户中心</a></dd>
                     <dd><a href="{{route('home.user.profile')}}" title="" >个人资料</a></dd>
+                    <hr style="margin: 5px 0;">
+                    <dd><a href="{{route('home.blog',['id'=>auth()->guard('member')->user()->id]) }}" title="" >我的主页</a></dd>
+                    <dd><a href="{{route('home.user.blog')}}" title="" >我的模板</a></dd>
                     <hr style="margin: 5px 0;">
                     <dd><a href="{{route('home.user.logout')}}" style="text-align: center;">退出</a></dd>
                 </dl>

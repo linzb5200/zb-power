@@ -80,7 +80,7 @@ Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],funct
     Route::post('repass','User\UserController@repass')->name('home.user.repass');
     Route::get('profile','User\UserController@profile')->name('home.user.profile');
     Route::get('finance','User\UserController@finance')->name('home.user.finance');
-    Route::get('content','User\UserController@content')->name('home.user.content');
+    Route::get('blog','User\UserController@blog')->name('home.user.blog');
     //修改资料
     Route::post('pwd','User\AjaxController@pwd')->name('home.user.pwd');
     Route::post('nickname','User\AjaxController@nickname')->name('home.user.nickname');

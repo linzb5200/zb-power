@@ -14,7 +14,7 @@ class UserController extends UserCenterController
     {
         parent::__construct();
         $this->middleware('guest:member')
-            ->except(['index','profile','repass','finance','content']);
+            ->except(['index','profile','repass','finance','blog']);
     }
 
     public function index(Request $request)
@@ -32,9 +32,9 @@ class UserController extends UserCenterController
         return view('home.user.finance');
     }
 
-    public function content()
+    public function blog()
     {
-        return view('home.user.content');
+        return view('home.user.blog');
     }
 
 

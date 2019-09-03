@@ -9,7 +9,7 @@
     </li>
     <li class="layui-nav-item @if(in_array($site['curl'],['/user'])) layui-this @endif">
         <a href="{{route('home.user')}}">
-            <i class="layui-icon">&#xe665;</i>
+            <i class="layui-icon">&#xe612;</i>
             用户中心
         </a>
     </li>
@@ -25,10 +25,11 @@
             财务管理
         </a>
     </li>
-    <li class="layui-nav-item @if(in_array($site['curl'],['/user/content'])) layui-this @endif">
-        <a href="{{route('home.user.content')}}">
-            <i class="layui-icon">&#xe705;</i>
-            内容管理
+
+    <li class="layui-nav-item @if(in_array($site['curl'],['/user/blog'])) layui-this @endif">
+        <a href="{{route('home.user.blog')}}">
+            <i class="layui-icon">&#xe656;</i>
+            我的模板
         </a>
     </li>
 </ul>

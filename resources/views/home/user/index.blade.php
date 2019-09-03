@@ -5,9 +5,9 @@
 @section('content')
     <div class="fly-panel fly-panel-user" pad20>
 
-        <div class="fly-msg" style="margin-bottom: 20px;">
-            您的邮箱尚未验证，这比较影响您的帐号安全，<a href="activate.html">立即去激活？</a>
-        </div>
+        {{--<div class="fly-msg" style="margin-bottom: 20px;">--}}
+            {{--您的邮箱尚未验证，这比较影响您的帐号安全，<a href="activate.html">立即去激活？</a>--}}
+        {{--</div>--}}
 
 
 
@@ -63,12 +63,9 @@
                                             class="layui-icon"></i><cite>修改头像</cite></a></li>
                             <li class="layui-col-sm3 layui-col-xs4"><a href="/user/set/#pass"><i
                                             class="layui-icon"></i><cite>修改密码</cite></a></li>
-                            <li class="layui-col-sm3 layui-col-xs4"><a href="/user/set/#bind"><i
-                                            class="layui-icon"></i><cite>帐号绑定</cite></a></li>
                             <li class="layui-col-sm3 layui-col-xs4"><a href="/jie/add/"><i
                                             class="layui-icon"></i><cite>账户充值</cite></a></li>
-                            <li class="layui-col-sm3 layui-col-xs4"><a href="/column/share/"><i class="layui-icon"></i><cite>查看分享</cite></a>
-                            </li>
+
                             <li class="layui-col-sm3 layui-col-xs4 LAY_search"><a href="javascript:;"><i
                                             class="layui-icon"></i><cite>账务明细  </cite></a></li>
                             <li class="layui-col-sm3 layui-col-xs4"><a href="/user/post/#collection"><i
