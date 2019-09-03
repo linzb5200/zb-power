@@ -57,20 +57,20 @@
                     <div class="fly-panel-title"> 快捷方式</div>
                     <div class="fly-panel-main">
                         <ul class="layui-row layui-col-space10 fly-shortcut">
-                            <li class="layui-col-sm3 layui-col-xs4"><a href="/user/set/"><i
+                            <li class="layui-col-sm3 layui-col-xs4"><a href="/user/profile/"><i
                                             class="layui-icon"></i><cite>修改信息</cite></a></li>
-                            <li class="layui-col-sm3 layui-col-xs4"><a href="/user/set/#avatar"><i
+                            <li class="layui-col-sm3 layui-col-xs4"><a href="/user/profile/#avatar"><i
                                             class="layui-icon"></i><cite>修改头像</cite></a></li>
-                            <li class="layui-col-sm3 layui-col-xs4"><a href="/user/set/#pass"><i
+                            <li class="layui-col-sm3 layui-col-xs4"><a href="/user/profile/#pass"><i
                                             class="layui-icon"></i><cite>修改密码</cite></a></li>
                             <li class="layui-col-sm3 layui-col-xs4"><a href="/jie/add/"><i
                                             class="layui-icon"></i><cite>账户充值</cite></a></li>
 
                             <li class="layui-col-sm3 layui-col-xs4 LAY_search"><a href="javascript:;"><i
                                             class="layui-icon"></i><cite>账务明细  </cite></a></li>
-                            <li class="layui-col-sm3 layui-col-xs4"><a href="/user/post/#collection"><i
+                            <li class="layui-col-sm3 layui-col-xs4"><a href="/user/blog#fav"><i
                                             class="layui-icon"></i><cite>我的收藏</cite></a></li>
-                            <li class="layui-col-sm3 layui-col-xs4"><a href="/jie/2461/"><i
+                            <li class="layui-col-sm3 layui-col-xs4"><a href="/user/blog#down"><i
                                             class="layui-icon"></i><cite>我的下载</cite></a></li>
                             <li class="layui-col-sm3 layui-col-xs4"><a href="/jie/15697/"><i
                                             class="layui-icon"></i><cite>成为卖家</cite></a></li>

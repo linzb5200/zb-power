@@ -15,6 +15,17 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
   var element = layui.element;
   var upload = layui.upload;
 
+    //显示当前tab
+    if(location.hash){
+        element.tabChange('user', location.hash.replace(/^#/, ''));
+    }
+
+    element.on('tab(user)', function(){
+        var othis = $(this), layid = othis.attr('lay-id');
+        if(layid){
+            location.hash = layid;
+        }
+    });
 
     var sms_interval = 90;
     var code_interval = null;
