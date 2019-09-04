@@ -14,7 +14,7 @@ class AjaxController extends UserCenterController
         parent::__construct();
         $this->middleware('guest:member')
             ->except(['pwd','nickname','validatephone','changephone','changeemail',
-                'validateemail','bind_qr','unbind_qq','senddx','sign','fav','zan']);
+                'validateemail','bind_qr','unbind_qq','senddx','sign','top','fav','zan']);
     }
 
     //修改密码
@@ -221,6 +221,23 @@ class AjaxController extends UserCenterController
             return response()->json(['status' => 0,'msg' => '签到成功','data'=>$data]);
         }
         return response()->json(['status' => 1099,'msg' => '签到失败']);
+    }
+    //活跃榜 TOP20
+    public function top(Request $request)
+    {
+        $model = new MembersScore;
+        $data = [];
+        //最新签到
+        $data[] = $model->newest();
+
+        //今日最快
+        $data[] = $model->fastest();
+
+        //总签到榜
+        $data[] = $model->leader();
+
+
+        return response()->json(['status' => 0,'msg' => '活跃榜','data'=>$data]);
     }
 
     //收藏

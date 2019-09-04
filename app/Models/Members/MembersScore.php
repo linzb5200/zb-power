@@ -12,6 +12,7 @@ class MembersScore extends Model
         'id','uid', 'type', 'way', 'used','score','change', 'keep','ip','status', 'created_at', 'updated_at',
     ];
 
+    //签到情况
     public function latest($id){
 
         $start = date('Y-m-d 00:00:00');
@@ -54,6 +55,57 @@ class MembersScore extends Model
         }
 
         return ['today'=>$today,'now'=>$now];
+    }
+
+    //最新签到
+    public function newest(){
+        $map = [
+            's.type'=>1,
+            's.way'=>1,
+            's.status'=>1,
+        ];
+        return $this->from("{$this->table} as s")
+            ->leftJoin('members as u', 's.uid', '=', 'u.id')
+            ->leftJoin('medias as m', 'u.avatar', '=', 'm.id')
+            ->select('s.*', 'u.name','u.avatar','m.path')
+            ->where($map)
+            ->orderBy('s.created_at', 'desc')
+            ->take(20)->get()->toArray();
+    }
+
+    //今日最快
+    public function fastest(){
+        $map = [
+            's.type'=>1,
+            's.way'=>1,
+            's.status'=>1,
+        ];
+        $start = date('Y-m-d 00:00:00');
+        $end = date('Y-m-d 23:59:59');
+        return $this->from("{$this->table} as s")
+            ->leftJoin('members as u', 's.uid', '=', 'u.id')
+            ->leftJoin('medias as m', 'u.avatar', '=', 'm.id')
+            ->select('s.*', 'u.name','u.avatar','m.path')
+            ->where($map)
+            ->whereBetween('s.created_at',[$start,$end])
+            ->orderBy('s.created_at', 'asc')
+            ->take(20)->get()->toArray();
+    }
+
+    //总签到榜
+    public function leader(){
+        $map = [
+            's.type'=>1,
+            's.way'=>1,
+            's.status'=>1,
+        ];
+        return $this->from("{$this->table} as s")
+            ->leftJoin('members as u', 's.uid', '=', 'u.id')
+            ->leftJoin('medias as m', 'u.avatar', '=', 'm.id')
+            ->select('s.*', 'u.name','u.avatar','m.path')
+            ->where($map)
+            ->orderBy('s.keep', 'desc')
+            ->take(20)->get()->toArray();
     }
 
 
