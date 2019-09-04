@@ -239,24 +239,12 @@ class AjaxController extends UserCenterController
     //收藏
     public function fav(Request $request)
     {
-        $id = auth('member')->user()->id;
-        $member = Member::findOrFail($id);
-        $score = $member->score + 5;
-        if ($member->update(['score'=>$score])){
-            return response()->json(['status' => 0,'msg' => '签到成功']);
-        }
-        return response()->json(['status' => 1099,'msg' => '签到失败']);
+        return response()->json(['status' => 0,'msg' => '收藏成功']);
     }
 
     //点赞
     public function zan(Request $request)
     {
-        $id = auth('member')->user()->id;
-        $member = Member::findOrFail($id);
-        $score = $member->score + 5;
-        if ($member->update(['score'=>$score])){
-            return response()->json(['status' => 0,'msg' => '签到成功']);
-        }
-        return response()->json(['status' => 1099,'msg' => '签到失败']);
+        return response()->json(['status' => 0,'msg' => '点赞成功']);
     }
 }

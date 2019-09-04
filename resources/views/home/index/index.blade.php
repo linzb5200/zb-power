@@ -83,14 +83,14 @@
 
         @if(isset($hots[$nv['id']]))
         @foreach($hots[$nv['id']] as $hot)
-        <li data-id="123">
+        <li data-id="{{$hot['id']}}">
             <div class="fly-case-img" href="{{route('products.show2',['zm'=>$costCate[$hot['cate_id']]['zm'],'cate'=>$nv['zm'],'id'=>$hot['id']]) }}" target="_blank">
                 <img src="{{ getImagePath($hot['thumb']) }}" alt="">
                 <div class="tool">
                     <cite class="layui-btn layui-btn-boss layui-btn-small" href="{{route('products.show2',['zm'=>$costCate[$hot['cate_id']]['zm'],'cate'=>$nv['zm'],'id'=>$hot['id']]) }}" target="_blank" >立即下载</cite>
                     <div class="btn">
-                        <i class="iconfont icon-zan"></i>
-                        <i class="layui-icon">&#xe600;</i>
+                        <i class="iconfont icon-zan mine-zan"></i>
+                        <i class="layui-icon mine-fav">&#xe600;</i>
                     </div>
                 </div>
             </div>

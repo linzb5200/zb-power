@@ -95,14 +95,14 @@
 
         <ul class="fly-case-list">
             @foreach($items as $item)
-            <li data-id="123">
+            <li data-id="{{$item['id']}}">
                 <div class="fly-case-img ahref" href="{{route('products.show2',['zm'=>$costCate[$item['cate_id']]['zm'],'cate'=>$cate['zm'],'id'=>$item['id']]) }}" target="_blank" >
                     <img src="{{ getImagePath($item['thumb']) }}" alt="">
                     <div class="tool">
                         <cite class="layui-btn layui-btn-boss layui-btn-small">立即下载</cite>
                         <div class="btn">
-                            <i class="iconfont icon-zan"></i>
-                            <i class="layui-icon">&#xe600;</i>
+                            <i class="iconfont icon-zan mine-zan"></i>
+                            <i class="layui-icon mine-fav">&#xe600;</i>
                         </div>
                     </div>
                 </div>

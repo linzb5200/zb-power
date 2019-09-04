@@ -86,7 +86,7 @@ Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],funct
     //我的明细
     Route::get('details/score','User\DetailsController@score')->name('home.user.details.score');
     Route::get('details/recharge','User\DetailsController@recharge')->name('home.user.details.recharge');
-    //修改资料
+    //ajax
     Route::post('pwd','User\AjaxController@pwd')->name('home.user.pwd');
     Route::post('nickname','User\AjaxController@nickname')->name('home.user.nickname');
     Route::post('validatephone','User\AjaxController@validatephone')->name('home.user.validatephone');
@@ -98,6 +98,8 @@ Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],funct
     Route::post('senddx', 'User\AjaxController@senddx')->name('home.user.senddx');
     Route::post('sign', 'User\AjaxController@sign')->name('home.user.sign');
     Route::post('top', 'User\AjaxController@top')->name('home.user.top');
+    Route::post('zan', 'User\AjaxController@zan')->name('home.user.zan');
+    Route::post('fav', 'User\AjaxController@fav')->name('home.user.fav');
 
 
 });
