@@ -10,13 +10,9 @@ layui.define('fly', function(exports){
   var layer = layui.layer;
   var form = layui.form;
   var fly = layui.fly;
-  
-  var dom = {
-    repass: $('#F_repass')
-    ,mine: $('#F_mine')
-  };
 
-    var prof = {
+
+    var active = {
     //修改密码
     repass: function(div){
         fly.json('/api/jie-delete/', {

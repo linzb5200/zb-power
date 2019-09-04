@@ -12,7 +12,8 @@ class AjaxController extends UserCenterController
     {
         parent::__construct();
         $this->middleware('guest:member')
-            ->except(['pwd','nickname','validatephone','changephone','changeemail','validateemail','bind_qr','unbind_qq','senddx']);
+            ->except(['pwd','nickname','validatephone','changephone','changeemail',
+                'validateemail','bind_qr','unbind_qq','senddx','sign']);
     }
 
     //修改密码
@@ -185,5 +186,17 @@ class AjaxController extends UserCenterController
 
         return response()->json($send);
 
+    }
+
+    //签到
+    public function sign(Request $request)
+    {
+        $id = auth('member')->user()->id;
+        $member = Member::findOrFail($id);
+        $score = $member->score + 5;
+        if ($member->update(['score'=>$score])){
+            return response()->json(['status' => 0,'msg' => '签单成功']);
+        }
+        return response()->json(['status' => 1099,'msg' => '签单失败']);
     }
 }
