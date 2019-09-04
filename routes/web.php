@@ -96,5 +96,7 @@ Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],funct
     Route::post('bindqq','User\AjaxController@bind_qq')->name('home.user.bind_qq');
     Route::post('unbindqq','User\AjaxController@unbind_qq')->name('home.user.unbind_qq');
     Route::post('senddx', 'User\AjaxController@senddx')->name('home.user.senddx');
+    Route::post('sign', 'User\AjaxController@sign')->name('home.user.sign');
+
 
 });

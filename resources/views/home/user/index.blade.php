@@ -14,11 +14,15 @@
         <div class="layui-row layui-col-space20">
             <div class="layui-col-md6">
                 <div class="fly-panel fly-panel-border">
-                    <div class="fly-panel-title"> 我的会员信息</div>
+                    <div class="fly-panel-title"> 我的会员信息 </div>
                     <div class="fly-panel-main layui-text" style="padding: 18px 15px; height: 50px; line-height: 26px;">
-                        <p> 您拥有金币：<span style="padding-right: 5px; color: #FF5722;">￥110 金币</span> <a href="/order/bill?itemid=16" target="_blank" class="layui-btn layui-btn-warm layui-btn-xs">充值</a>  </p>
+                        <p> 您拥有：<span style="padding-right: 5px; color: #FF5722;" id="LAY_memberScore">{{$member->score}} 积分</span>
+                            <a href="#" target="_blank" class="layui-btn layui-btn-warm layui-btn-xs">兑换</a>
+                        </p>
 
-                        <p> <span style="padding-right: 20px;">您当前为：非 VIP</span> </p>
+                        <p> <span style="padding-right: 20px;">您当前为：非 VIP</span>
+                            <a href="#" target="_blank" class="layui-btn layui-btn-warm layui-btn-xs">充值</a>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -29,11 +33,17 @@
                         <i class="fly-mid"></i>
                         <a href="javascript:;" class="fly-link" id="LAY_signinTop">活跃榜
                             <span class="layui-badge-dot"></span>
-                        </a> <span class="fly-signin-days">已连续签到<cite>0</cite>天</span>
+                        </a> <span class="fly-signin-days">已连续签到<cite>@if($dash['sign']['today']) {{$dash['sign']['today']->keep??0}} @else 0 @endif</cite>天</span>
                     </div>
                     <div class="fly-panel-main fly-signin-main">
+                        @if($dash['sign']['today'])
+                        <button class="layui-btn layui-btn-disabled" id="LAY_signin">今日签到</button>
+                        <span>获得了<cite>{{$dash['sign']['today']->change}}</cite>金币</span>
+                        @else
                         <button class="layui-btn layui-btn-danger" id="LAY_signin">今日签到</button>
-                        <span>可获得<cite>￥5</cite>金币</span>
+                        <span>可获得<cite>{{$dash['sign']['now']->change}}</cite>金币</span>
+                        @endif
+
                     </div>
                 </div>
             </div>

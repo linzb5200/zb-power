@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home\User;
 
+use App\Models\Members\MembersScore;
 use Illuminate\Http\Request;
 use App\Models\Member;
 
@@ -196,8 +197,28 @@ class AjaxController extends UserCenterController
         $id = auth('member')->user()->id;
         $member = Member::findOrFail($id);
         $score = $member->score + 5;
-        if ($member->update(['score'=>$score])){
-            return response()->json(['status' => 0,'msg' => '签到成功']);
+
+        $latest = (new MembersScore)->latest($id);
+
+        if($latest['today']){
+            return response()->json(['status' => 1099,'msg' => '今日已签到']);
+        }
+
+        $data = [
+            'uid'=>$id,
+            'type'=>1,
+            'way'=>1,
+            'score'=>$member->score + $latest['now']->change,
+            'change'=>$latest['now']->change,
+            'keep'=>$latest['now']->keep,
+            'ip'=>$request->ip(),
+            'status'=>1,
+        ];
+
+        $sign = MembersScore::create($data);
+        if ($sign){
+            $member->update(['score'=>$score]);
+            return response()->json(['status' => 0,'msg' => '签到成功','data'=>$data]);
         }
         return response()->json(['status' => 1099,'msg' => '签到失败']);
     }

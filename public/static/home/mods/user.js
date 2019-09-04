@@ -4,16 +4,16 @@
  
 layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
 
-  var $ = layui.jquery;
-  var layer = layui.layer;
-  var util = layui.util;
-  var laytpl = layui.laytpl;
-  var form = layui.form;
-  var laypage = layui.laypage;
-  var fly = layui.fly;
-  var flow = layui.flow;
-  var element = layui.element;
-  var upload = layui.upload;
+  var $ = layui.jquery
+      ,layer = layui.layer
+      ,util = layui.util
+      ,laytpl = layui.laytpl
+      ,form = layui.form
+      ,laypage = layui.laypage
+      ,fly = layui.fly
+      ,flow = layui.flow
+      ,element = layui.element
+      ,upload = layui.upload;
 
     //显示当前tab
     if(location.hash){
