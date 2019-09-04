@@ -70,11 +70,14 @@ class MembersScore extends Model
             's.way'=>1,
             's.status'=>1,
         ];
+        $start = date('Y-m-d 00:00:00');
+        $end = date('Y-m-d 23:59:59');
         return $this->from("{$this->table} as s")
             ->leftJoin('members as u', 's.uid', '=', 'u.id')
             ->leftJoin('medias as m', 'u.avatar', '=', 'm.id')
             ->select('s.*', 'u.name','u.avatar','m.path')
             ->where($map)
+            ->whereBetween('s.created_at',[$start,$end])
             ->orderBy('s.created_at', 'desc')
             ->take(20)->get()->toArray();
     }
