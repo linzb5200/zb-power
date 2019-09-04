@@ -34,10 +34,11 @@ class MembersScore extends Model
             ->first();
 
         $now = (object)array();
-        $now->keep = 1;
+        $now->days = 0;
+        $now->keep = 0;
         $now->change = 5;
         if($yesterday){
-            $kp = $yesterday->keep +1;
+            $kp = $yesterday->keep+1;
             if($kp < 5){
                 $now->change = 5;
             }elseif ($kp>=5 && $kp<15){
@@ -51,7 +52,12 @@ class MembersScore extends Model
             }elseif ($kp>=365){
                 $now->change = 50;
             }
-            $now->keep +=1;
+            $now->keep = $kp;
+            $now->days = $yesterday->keep;
+        }
+
+        if($today){
+            $now->days = $today->keep;
         }
 
         return ['today'=>$today,'now'=>$now];

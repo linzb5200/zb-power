@@ -33,7 +33,7 @@
                         <i class="fly-mid"></i>
                         <a href="javascript:;" class="fly-link" id="LAY_signinTop">活跃榜
                             <span class="layui-badge-dot"></span>
-                        </a> <span class="fly-signin-days">已连续签到<cite>@if($dash['sign']['today']) {{$dash['sign']['today']->keep??0}} @else 0 @endif</cite>天</span>
+                        </a> <span class="fly-signin-days">已连续签到<cite>{{$dash['sign']['now']->days}}</cite>天</span>
                     </div>
                     <div class="fly-panel-main fly-signin-main">
                         @if($dash['sign']['today'])

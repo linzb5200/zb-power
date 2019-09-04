@@ -229,14 +229,10 @@ class AjaxController extends UserCenterController
         $data = [];
         //最新签到
         $data[] = $model->newest();
-
         //今日最快
         $data[] = $model->fastest();
-
         //总签到榜
         $data[] = $model->leader();
-
-
         return response()->json(['status' => 0,'msg' => '活跃榜','data'=>$data]);
     }
 
