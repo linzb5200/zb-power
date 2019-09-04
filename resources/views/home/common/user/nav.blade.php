@@ -19,15 +19,15 @@
             个人资料
         </a>
     </li>
-    <li class="layui-nav-item @if(in_array($site['curl'],['/user/orders'])) layui-this @endif">
-        <a href="{{route('home.user.orders')}}">
+    <li class="layui-nav-item @if(in_array($site['curl'],['/user/details/score','/user/details/recharge'])) layui-this @endif">
+        <a href="{{route('home.user.details.score')}}">
             <i class="layui-icon">&#xe65e;</i>
             财务管理
         </a>
     </li>
 
-    <li class="layui-nav-item @if(in_array($site['curl'],['/user/blog'])) layui-this @endif">
-        <a href="{{route('home.user.blog')}}">
+    <li class="layui-nav-item @if(in_array($site['curl'],['/user/mine','/user/mine/fav','/user/mine/down'])) layui-this @endif">
+        <a href="{{route('home.user.mine')}}">
             <i class="layui-icon">&#xe656;</i>
             我的模板
         </a>

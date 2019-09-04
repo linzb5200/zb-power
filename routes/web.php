@@ -79,9 +79,9 @@ Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],funct
     Route::get('/','User\UserController@index')->name('home.user');
     Route::get('profile','User\UserController@profile')->name('home.user.profile');
     //我的
+    Route::get('mine','User\MineController@art')->name('home.user.mine');
     Route::get('mine/fav','User\MineController@fav')->name('home.user.mine.fav');
     Route::get('mine/down','User\MineController@down')->name('home.user.mine.down');
-    Route::get('mine/art','User\MineController@art')->name('home.user.mine.art');
     //我的明细
     Route::get('details/score','User\DetailsController@score')->name('home.user.details.score');
     Route::get('details/recharge','User\DetailsController@recharge')->name('home.user.details.recharge');

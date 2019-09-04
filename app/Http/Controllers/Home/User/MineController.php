@@ -12,7 +12,7 @@ class MineController extends UserCenterController
     public function __construct()
     {
         parent::__construct();
-        $this->middleware('guest:member')->except(['fav','down']);
+        $this->middleware('guest:member')->except(['fav','down','art']);
     }
 
     //我的收藏
