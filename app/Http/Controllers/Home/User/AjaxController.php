@@ -13,7 +13,7 @@ class AjaxController extends UserCenterController
         parent::__construct();
         $this->middleware('guest:member')
             ->except(['pwd','nickname','validatephone','changephone','changeemail',
-                'validateemail','bind_qr','unbind_qq','senddx','sign']);
+                'validateemail','bind_qr','unbind_qq','senddx','sign','fav','zan']);
     }
 
     //修改密码
@@ -139,6 +139,7 @@ class AjaxController extends UserCenterController
     }
 
 
+    //绑定微信
     public function bind_qr(Request $request)
     {
 
@@ -155,6 +156,7 @@ class AjaxController extends UserCenterController
         return response()->json(['status' => 1099,'msg' => '系统错误']);
     }
 
+    //绑定QQ
     public function unbind_qq(Request $request)
     {
 
@@ -195,8 +197,32 @@ class AjaxController extends UserCenterController
         $member = Member::findOrFail($id);
         $score = $member->score + 5;
         if ($member->update(['score'=>$score])){
-            return response()->json(['status' => 0,'msg' => '签单成功']);
+            return response()->json(['status' => 0,'msg' => '签到成功']);
         }
-        return response()->json(['status' => 1099,'msg' => '签单失败']);
+        return response()->json(['status' => 1099,'msg' => '签到失败']);
+    }
+
+    //收藏
+    public function fav(Request $request)
+    {
+        $id = auth('member')->user()->id;
+        $member = Member::findOrFail($id);
+        $score = $member->score + 5;
+        if ($member->update(['score'=>$score])){
+            return response()->json(['status' => 0,'msg' => '签到成功']);
+        }
+        return response()->json(['status' => 1099,'msg' => '签到失败']);
+    }
+
+    //点赞
+    public function zan(Request $request)
+    {
+        $id = auth('member')->user()->id;
+        $member = Member::findOrFail($id);
+        $score = $member->score + 5;
+        if ($member->update(['score'=>$score])){
+            return response()->json(['status' => 0,'msg' => '签到成功']);
+        }
+        return response()->json(['status' => 1099,'msg' => '签到失败']);
     }
 }

@@ -77,10 +77,14 @@ Route::group(['namespace'=>'Home','prefix'=>'user'],function (){
 Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],function (){
     //个人中心
     Route::get('/','User\UserController@index')->name('home.user');
-    Route::post('repass','User\UserController@repass')->name('home.user.repass');
     Route::get('profile','User\UserController@profile')->name('home.user.profile');
-    Route::get('orders','User\UserController@orders')->name('home.user.orders');
-    Route::get('blog','User\UserController@blog')->name('home.user.blog');
+    //我的
+    Route::get('mine/fav','User\MineController@fav')->name('home.user.mine.fav');
+    Route::get('mine/down','User\MineController@down')->name('home.user.mine.down');
+    Route::get('mine/art','User\MineController@art')->name('home.user.mine.art');
+    //我的明细
+    Route::get('details/score','User\DetailsController@score')->name('home.user.details.score');
+    Route::get('details/recharge','User\DetailsController@recharge')->name('home.user.details.recharge');
     //修改资料
     Route::post('pwd','User\AjaxController@pwd')->name('home.user.pwd');
     Route::post('nickname','User\AjaxController@nickname')->name('home.user.nickname');
