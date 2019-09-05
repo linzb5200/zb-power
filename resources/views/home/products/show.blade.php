@@ -62,7 +62,7 @@
 
                 <div class="fly-panel">
                     <div class="fly-panel-main">
-                        <a href="{{ route('download',['id'=>$info['id']]) }}" target="_blank" class="fly-download " >立即下载</a>
+                        <a href="{{ route('home.user.download',['id'=>$info['id']]) }}" target="_blank" class="fly-download " >立即下载</a>
                     </div>
                 </div>
 

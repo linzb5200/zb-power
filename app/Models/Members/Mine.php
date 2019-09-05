@@ -4,6 +4,7 @@ namespace App\Models\Members;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Mine extends Model
 {
@@ -13,6 +14,20 @@ class Mine extends Model
     protected $fillable = [
         'id','uid', 'product_id', 'type', 'created_at', 'updated_at',
     ];
+    //统计
+    public function tj(){
+        $uid = auth('member')->user()->id;
+
+        $data = [
+            'mine_fav'=>$this->where(['uid'=>$uid,'type'=>1,])->count(),
+            'mine_zan'=>$this->where(['uid'=>$uid,'type'=>2,])->count(),
+            'mine_down'=>$this->where(['uid'=>$uid,'type'=>3,])->count(),
+            'mine_art'=>DB::table('products')->where(['uid'=>$uid])->count('id'),
+        ];
+
+        return $data;
+
+    }
 
     //收藏
     public function fav($id,$check=false,$type = 1){

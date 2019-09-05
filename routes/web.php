@@ -48,7 +48,6 @@ Route::group(['namespace' => 'Home\Products'], function () {
     Route::get('/{zm}{cate}/{id}.html','ProductsController@show')->name('products.show2')
         ->where([ 'zm' => '[a-z0-9]','cate' => '^ppt|excel|word|resume|design','id' => '[0-9]+']);
 
-
     Route::post('/search','ProductsController@search')->name('products.search');
 
 });
@@ -78,10 +77,11 @@ Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],funct
     Route::get('/','User\UserController@index')->name('home.user');
     Route::get('profile','User\UserController@profile')->name('home.user.profile');
     //我的
-    Route::get('mine','User\MineController@art')->name('home.user.mine');
+    Route::get('mine','User\MineController@mine')->name('home.user.mine');
     Route::get('mine/fav','User\MineController@fav')->name('home.user.mine.fav');
     Route::get('mine/down','User\MineController@down')->name('home.user.mine.down');
-    Route::get('mine/add','User\MineController@add')->name('home.user.mine.add');
+    Route::get('mine/zan','User\MineController@zan')->name('home.user.mine.zan');
+    Route::get('release','User\MineController@release')->name('home.user.mine.release');
     //我的明细
     Route::get('details/score','User\DetailsController@score')->name('home.user.details.score');
     Route::get('details/recharge','User\DetailsController@recharge')->name('home.user.details.recharge');
@@ -99,7 +99,7 @@ Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],funct
     Route::post('top', 'User\AjaxController@top')->name('home.user.top');
     Route::post('zan', 'User\AjaxController@zan')->name('home.user.zan');
     Route::post('fav', 'User\AjaxController@fav')->name('home.user.fav');
-    Route::post('download', 'User\AjaxController@download')->name('home.user.download');
+    Route::get('download', 'User\AjaxController@download')->name('home.user.download');
 
 
 });

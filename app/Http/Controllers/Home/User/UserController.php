@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home\User;
 
 use App\Models\Member;
+use App\Models\Members\Mine;
 use App\Models\Members\Score;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -23,6 +24,8 @@ class UserController extends UserCenterController
         $dash = [];
         $dash['sign'] = (new Score)->latest($this->member->id);
 
+        $counts = (new Mine)->tj();
+        $dash = array_merge($dash,$counts);
 
         return view('home.user.index',compact(['dash']));
     }

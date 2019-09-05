@@ -52,10 +52,9 @@
                 <div class="fly-panel fly-panel-border">
 
                     <div class="fly-panel-main fly-infos-main layui-text">
-                        <span><i class="layui-icon">&#xe600;</i> 收藏<cite>5</cite></span>
-                        <span><i class="layui-icon">&#xe601;</i> 下载<cite>5</cite></span>
-                        <span><i class="layui-icon">&#xe62f;</i> 上传<cite>5</cite></span>
-                        <span><i class="iconfont icon-jiaoliu"></i> 消息<cite>5</cite></span>
+                        <span><i class="layui-icon">&#xe600;</i> 收藏<cite>{{$dash['mine_fav']}}</cite></span>
+                        <span><i class="layui-icon">&#xe601;</i> 下载<cite>{{$dash['mine_down']}}</cite></span>
+                        <span><i class="layui-icon">&#xe62f;</i> 上传<cite>{{$dash['mine_art']}}</cite></span>
                     </div>
                 </div>
 

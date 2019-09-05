@@ -18,7 +18,6 @@ class ProductsController extends Controller
 
         $arg = $this->myArg();
 
-
         $modelCate = new ProductsCate();
 
         $fid = $arg['cate']['id'];
@@ -78,32 +77,41 @@ class ProductsController extends Controller
         return view('home.products.index',compact(['items']));
     }
 
-    public function show(Request $request,$cate='',$py='',$id)
+    public function show(Request $request)
     {
+        $arg = getArg(['cate','zm','id']);
+        $id = $arg['id'];
+
         $model = new Products();
         $info = $model->getInfo($id);
-        $channel = $this->getChannel($info['cate_str']);
+        $channel = $this->getChannel($arg,$info);
 
         return view('home.products.show',compact(['info','channel']));
     }
 
     //获取详情页导航
-    public function getChannel($str)
+    public function getChannel($arg,$info)
     {
-        if(empty($str)) return '';
-        $model = new ProductsCate();
-        $cats = $model->getCacheList();
-        $ids = explode('/',$str);
-
         $temp = [];
-        $url = '/';
-        foreach ($ids as $k => $id){
-            $url .= $cats[$id]['pinyin'].'/';
-            $temp[$k] = [
-                'url'=> $url,
-                'title'=> $cats[$id]['title'],
-                'arrow'=> "<span lay-separator=''>></span>",
-            ];
+        foreach ($this->nav as $nav){
+            if($nav['zm'] == $arg['cate']){
+                $temp[] = [
+                    'url'=> route('products.cate',['cate'=>$arg['cate']]).'/',
+                    'title'=> $nav['title'],
+                    'arrow'=> "<span lay-separator=''>></span>",
+                ];
+
+                foreach ($nav['children'] as $child){
+                    if($child['id'] == $info['cate_id']){
+                        $temp[] = [
+                            'url'=> route('products.cate2',['cate'=>$arg['cate'],'zm'=>$child['zm']]).'/',
+                            'title'=> $child['title'],
+                            'arrow'=> "<span lay-separator=''>></span>",
+                        ];
+                    }
+
+                }
+            }
         }
 
         return $temp;

@@ -3,52 +3,26 @@
 @section('content')
     <div class="fly-panel fly-panel-user" pad20>
 
-        <div class="layui-tab layui-tab-brief" lay-filter="user">
+        <div class="layui-tab layui-tab-brief" lay-filter="mine">
             <ul class="layui-tab-title" id="LAY_mine">
-                <li data-type="mine-tpl" lay-id="index" class="layui-this">我的上传（<span>89</span>）</li>
-                <li data-type="mine-down" lay-id="down">我的下载 （<span>16</span>）</li>
-                <li data-type="mine-fav" lay-id="fav" >我的收藏（<span>69</span>）</li>
+                <li data-type="mine-tpl" data-url="{{route('home.user.mine')}}" lay-id="index">我的上传（<span>{{$counts['mine_art']}}</span>）</li>
+                <li data-type="mine-down" data-url="{{route('home.user.mine.down')}}" lay-id="down" class="layui-this">我的下载 （<span>{{$counts['mine_down']}}</span>）</li>
+                <li data-type="mine-fav" data-url="{{route('home.user.mine.fav')}}" lay-id="fav" >我的收藏（<span>{{$counts['mine_fav']}}</span>）</li>
+                <li data-type="mine-zan" data-url="{{route('home.user.mine.zan')}}" lay-id="zan">我的点赞（<span>{{$counts['mine_zan']}}</span>）</li>
             </ul>
             <div class="layui-tab-content" style="padding: 20px 0;">
-                <div class="layui-tab-item layui-show">
+
+                <div class="layui-tab-item layui-show" >
                     <ul class="mine-view jie-row">
-                        <li>
-                            <a class="jie-title" href="../jie/detail.html" target="_blank">基于 layui 的极简社区页面模版</a>
-                            <i>2017/3/14 上午8:30:00</i>
-                            <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-                            <em>661阅/10答</em>
-                        </li>
-                        <li>
-                            <a class="jie-title" href="../jie/detail.html" target="_blank">基于 layui 的极简社区页面模版</a>
-                            <i>2017/3/14 上午8:30:00</i>
-                            <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-                            <em>661阅/10答</em>
-                        </li>
-                        <li>
-                            <a class="jie-title" href="../jie/detail.html" target="_blank">基于 layui 的极简社区页面模版</a>
-                            <i>2017/3/14 上午8:30:00</i>
-                            <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-                            <em>661阅/10答</em>
-                        </li>
+                        @foreach($items as $item)
+                            <li>
+                                <a class="jie-title" href="{{route('products.show2',['zm'=>$item->zm,'cate'=>$costCate[$item->parent_id]['zm'],'id'=>$item->product_id]) }}" target="_blank">{{$item->title}}</a>
+                                <i>下载于{{timeAgo($item->created_at)}}</i>  </li>
+                        @endforeach
                     </ul>
-                    <div id="LAY_page"></div>
+                    <div id="LAY_page1">{!! $ret->links() !!}</div>
                 </div>
-                <div class="layui-tab-item">
-                    <ul class="mine-view jie-row">
-                        <li>
-                            <a class="jie-title" href="../jie/detail.html" target="_blank">基于 layui 的极简社区页面模版</a>
-                            <i>收藏于23小时前</i>  </li>
-                    </ul>
-                    <div id="LAY_page1"></div>
-                </div>
-                <div class="layui-tab-item">
-                    <ul class="mine-view jie-row">
-                        <li>
-                            <a class="jie-title" href="../jie/detail.html" target="_blank">基于 layui 的极简社区页面模版</a>
-                            <i>收藏于23小时前</i>  </li>
-                    </ul>
-                    <div id="LAY_page1"></div>
-                </div>
+
             </div>
         </div>
     </div>

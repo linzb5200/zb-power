@@ -6,12 +6,8 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
 
   var $ = layui.jquery
       ,layer = layui.layer
-      ,util = layui.util
-      ,laytpl = layui.laytpl
       ,form = layui.form
-      ,laypage = layui.laypage
       ,fly = layui.fly
-      ,flow = layui.flow
       ,element = layui.element
       ,upload = layui.upload;
 
@@ -24,6 +20,13 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
         var othis = $(this), layid = othis.attr('lay-id');
         if(layid){
             location.hash = layid;
+        }
+    });
+
+    element.on('tab(mine)', function(){
+        var url = $(this).attr('data-url');
+        if(url){
+            location.href = url;
         }
     });
 
@@ -211,6 +214,45 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
             });
         });
     }
+
+
+    //验证规则
+    form.verify({
+        resRequired: [
+            /[\S]+/
+            ,'请上传组件资源包'
+        ]
+    });
+    //上传组件
+    var elemRes = $('#FLY-extend-res')
+    upload.render({
+        elem: '#FLY-extend-upload'
+        ,url: '/api/upload/file'
+        ,accept: 'file'
+        ,exts: 'zip|rar|7z'
+        ,size: 3*1000*2014
+        ,done: function(res){
+            if(res.status == 0){
+                elemRes.val(res.url);
+                this.elem.find('p').html(res.filename);
+                layer.msg('文件上传成功', {icon: 1});
+            } else {
+                layer.msg(res.msg, {icon: 5});
+            }
+        }
+    });
+
+    //提交成功后的回调
+    fly.form['extendRelease'] = function(field, elem, res){
+        layer.alert(res.msg, {
+            icon: 1
+            ,btnAlign: 'c'
+            ,btn: ['朕已知晓']
+            ,end: function(){
+                location.href = '/user/extend/';
+            }
+        });
+    };
 
   exports('user', null);
   

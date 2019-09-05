@@ -39,7 +39,7 @@
                     <dd><a href="{{route('home.user.profile')}}" title="" >个人资料</a></dd>
                     <dd><a href="{{route('home.user.mine')}}" title="" >我的模板</a></dd>
                     <hr style="margin: 5px 0;">
-                    <dd><a href="{{route('home.user.mine.add')}}" title="" >上传作品</a></dd>
+                    <dd><a href="{{route('home.user.mine.release')}}" title="" >上传作品</a></dd>
                     <dd><a href="{{route('home.blog',['id'=>auth()->guard('member')->user()->id]) }}" title="" >我的主页</a></dd>
                     <hr style="margin: 5px 0;">
                     <dd><a href="{{route('home.user.logout')}}" style="text-align: center;">退出</a></dd>
