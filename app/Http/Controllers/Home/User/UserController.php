@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Home\User;
 
 use App\Models\Member;
-use App\Models\Members\MembersScore;
+use App\Models\Members\Score;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -21,7 +21,7 @@ class UserController extends UserCenterController
     {
 
         $dash = [];
-        $dash['sign'] = (new MembersScore)->latest($this->member->id);
+        $dash['sign'] = (new Score)->latest($this->member->id);
 
 
         return view('home.user.index',compact(['dash']));

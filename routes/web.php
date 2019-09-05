@@ -50,12 +50,11 @@ Route::group(['namespace' => 'Home\Products'], function () {
 
 
     Route::post('/search','ProductsController@search')->name('products.search');
-    Route::get('/download','ProductsController@download')->name('download');
 
 });
 
 //博客-不需要认证
-Route::group(['namespace'=>'Home','prefix'=>'blog'],function (){
+Route::group(['namespace'=>'Home','prefix'=>'u'],function (){
     //个人主页
     Route::get('/{id}.html', 'Blog\BlogController@index')->name('home.blog');
 });
@@ -100,6 +99,7 @@ Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],funct
     Route::post('top', 'User\AjaxController@top')->name('home.user.top');
     Route::post('zan', 'User\AjaxController@zan')->name('home.user.zan');
     Route::post('fav', 'User\AjaxController@fav')->name('home.user.fav');
+    Route::post('download', 'User\AjaxController@download')->name('home.user.download');
 
 
 });

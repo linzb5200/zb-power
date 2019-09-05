@@ -4,7 +4,7 @@ namespace App\Models\Members;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MembersScore extends Model
+class Score extends Model
 {
     protected $table = 'members_score';
 
@@ -13,12 +13,12 @@ class MembersScore extends Model
     ];
 
     //签到情况
-    public function latest($id){
+    public function latest($uid){
 
         $start = date('Y-m-d 00:00:00');
         $end = date('Y-m-d 23:59:59');
         $map = [
-            'uid'=>$id,
+            'uid'=>$uid,
             'type'=>1,
             'way'=>1,
             'status'=>1,

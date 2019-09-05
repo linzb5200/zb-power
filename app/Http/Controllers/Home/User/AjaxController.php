@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Home\User;
 
-use App\Models\Members\MembersScore;
+use App\Models\Members\Mine;
+use App\Models\Members\Score;
+use App\Models\Products\Products;
 use Illuminate\Http\Request;
 use App\Models\Member;
 
@@ -14,7 +16,7 @@ class AjaxController extends UserCenterController
         parent::__construct();
         $this->middleware('guest:member')
             ->except(['pwd','nickname','validatephone','changephone','changeemail',
-                'validateemail','bind_qr','unbind_qq','senddx','sign','top','fav','zan']);
+                'validateemail','bind_qr','unbind_qq','senddx','sign','top','fav','zan','download']);
     }
 
     //修改密码
@@ -198,7 +200,7 @@ class AjaxController extends UserCenterController
         $member = Member::findOrFail($id);
         $score = $member->score + 5;
 
-        $latest = (new MembersScore)->latest($id);
+        $latest = (new Score)->latest($id);
 
         if($latest['today']){
             return response()->json(['status' => 1099,'msg' => '今日已签到']);
@@ -215,7 +217,7 @@ class AjaxController extends UserCenterController
             'status'=>1,
         ];
 
-        $sign = MembersScore::create($data);
+        $sign = Score::create($data);
         if ($sign){
             $member->update(['score'=>$score]);
             return response()->json(['status' => 0,'msg' => '签到成功','data'=>$data]);
@@ -225,7 +227,7 @@ class AjaxController extends UserCenterController
     //活跃榜 TOP20
     public function top(Request $request)
     {
-        $model = new MembersScore;
+        $model = new Score;
         $data = [];
         //最新签到
         $data[] = $model->newest();
@@ -239,12 +241,51 @@ class AjaxController extends UserCenterController
     //收藏
     public function fav(Request $request)
     {
+        $id = $request->input('id');
+        $model = new Mine;
+        $count = $model->fav($id,true);
+        if($count){
+            return response()->json(['status' => 0,'msg' => '已收藏成功']);
+        }
+        $model->fav($id);
         return response()->json(['status' => 0,'msg' => '收藏成功']);
     }
 
     //点赞
     public function zan(Request $request)
     {
+        $id = $request->input('id');
+        $model = new Mine;
+        $count = $model->zan($id,true);
+        if($count){
+            return response()->json(['status' => 0,'msg' => '已点赞成功']);
+        }
+        $model->zan($id);
         return response()->json(['status' => 0,'msg' => '点赞成功']);
+    }
+
+    //下载
+    public function download(Request $request)
+    {
+        $id = $request->input('id');
+
+        //下载记录
+        $model = new Mine;
+        $count = $model->down($id,true);
+        if($count==0){
+            $model->down($id);
+        }
+
+        $info = Products::findOrFail($id);
+        $data = [
+            'download' =>$info['download'] + 1
+        ];
+        $info->update($data);
+        $file = public_path() . getImagePath($info['attachment']);   //要下载的路径文件
+        $pathInfo = pathinfo($file);
+        $filename = time().mt_rand(100,999).'.'.$pathInfo['extension']; //这个只是文件的名字
+        header("Content-Type: application/force-download");
+        header("Content-Disposition: attachment; filename=".($filename));
+        readfile($file);
     }
 }

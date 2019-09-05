@@ -87,24 +87,6 @@ class ProductsController extends Controller
         return view('home.products.show',compact(['info','channel']));
     }
 
-    public function download(Request $request)
-    {
-        $id = $request->input('id');
-        $info = Products::findOrFail($id);
-        $data = [
-            'download' =>$info['download'] + 1
-        ];
-        $info->update($data);
-
-        $file = public_path() . getImagePath($info['attachment']);   //要下载的路径文件
-
-        $pathInfo = pathinfo($file);
-        $filename = time().mt_rand(100,999).'.'.$pathInfo['extension']; //这个只是文件的名字
-        header("Content-Type: application/force-download");
-        header("Content-Disposition: attachment; filename=".($filename));
-        readfile($file);
-    }
-
     //获取详情页导航
     public function getChannel($str)
     {
