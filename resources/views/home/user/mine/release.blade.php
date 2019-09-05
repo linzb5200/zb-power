@@ -52,18 +52,23 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="layui-col-md12">
                                 <div class="layui-form-item layui-form-text">
-                                    <label class="layui-form-label">简单描述作品功能</label>
                                     <div class="layui-input-block">
-                                        <textarea name="desc" placeholder="" class="layui-textarea" autocomplete="off" style="min-height: 40px;"></textarea>
+                                        <textarea id="L_content" name="content" required lay-verify="required" placeholder="" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
+                                        <label class="layui-form-label" style="top: -2px;">内容文档</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="layui-col-md12">
-                                <div class="layui-form-item layui-form-text">
-                                    <div class="layui-input-block">
-                                        <textarea id="L_content" name="content" required lay-verify="required" placeholder="详细描述" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
+                                <div class="layui-upload">
+                                    <button type="button" class="layui-btn" id="test1">
+                                        <i class="layui-icon layui-icon-upload"></i>封面图
+                                    </button>
+                                    <div class="layui-upload-list">
+                                        <img class="layui-upload-img" id="demo1">
+                                        <p id="demoText"></p>
                                     </div>
                                 </div>
                             </div>

@@ -1,10 +1,11 @@
 .layui-btn-fluid {  width: 100%;}
 .layer-open {  margin: 30px 30px 30px 0;}
-/*.layui-form-item {  margin-left: 15px;}*/
-.layui-form-item .identify-btn {  background-color: #5cb85c;  text-align: center;  color: #fff;  cursor: pointer;}
-.layui-form-item .identify-btn:hover{background-color:#449d44}
-.layui-form-item .layui-btn-orange{  background-color: #FF8C00;  color: #fff;}
-.layui-form-item .fa{  font-size: 1.5em;color: #8d8d8d;}
+.layer-open .layui-form-item {  margin-left: 30px;}
+.layer-open .layui-form-item .identify-btn {  background-color: #5cb85c;  text-align: center;  color: #fff;  cursor: pointer;}
+.layer-open .layui-form-item .identify-btn:hover{background-color:#449d44}
+.layer-open .layui-form-item .layui-btn-orange{  background-color: #FF8C00;  color: #fff;}
+.layer-open .layui-form-item .fa{  font-size: 1.8em;color: #8d8d8d;}
+.layer-open .layui-form-item .fa-envelope-o{  font-size: 1.5em;color: #8d8d8d;}
 .masonry-item{border: 1px solid #e7e7eb !important;margin-left: 10px !important;}
 .masonry-item{width: 48%;}
 .publish .layui-card-header {
@@ -17,4 +18,10 @@
 }
 .publish .layui-form-item {
     margin-left: 0px;
+}
+
+.publish .layui-upload-img {
+    width: 92px;
+    height: 92px;
+    margin: 0 10px 10px 0;
 }
