@@ -390,7 +390,8 @@ body .layui-edit-face  .layui-layer-content{padding:0; background-color:#fff; co
 /* Detail页 */
 .detail-box{padding: 20px;}
 .detail h1{font-size: 24px; line-height: 36px;}
-.fly-detail-info{position: relative; margin: 10px 0 15px;}
+
+.fly-detail-info{position: relative; /*margin: 10px 0 15px;*/ height: 28px;display: block}
 .fly-detail-info .layui-btn{height: 20px; line-height: 20px; vertical-align: top; border-radius: 0;}
 .fly-detail-info .layui-btn+.layui-btn{margin-left: 0;}
 .fly-admin-box{position: relative; display: inline-block; vertical-align: top; margin-left: 20px;}

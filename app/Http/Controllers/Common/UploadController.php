@@ -91,7 +91,7 @@ class UploadController extends Controller
                 $url = Storage::disk($disk)->url($newPath);
 
                 //检测图片类型,图片就压缩
-                if (!in_array(strtolower($ext),$allowImgs)){
+                if (in_array(strtolower($ext),$allowImgs)){
                     //剪切压缩
                     $w = $request->input('w','');
                     $h = $request->input('h','');
@@ -281,7 +281,7 @@ class UploadController extends Controller
                 $url = Storage::disk($disk)->url($newPath);
 
                 //检测图片类型，图片就压缩
-                if (!in_array(strtolower($ext),$allowImgs)){
+                if (in_array(strtolower($ext),$allowImgs)){
                     //剪切压缩
                     $w = $request->input('w',700);
                     $h = $request->input('h',null);

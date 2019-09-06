@@ -74,7 +74,7 @@ class ProductsController extends Controller
             ]
         ];
         $query = Products::query();
-        $res = getMap($query,$map)->orderBy('id')->paginate($request->get('limit',30))->toArray();
+        $res = getMap($query,$map)->orderBy('id', 'desc')->paginate($request->get('limit',30))->toArray();
 
         $modelCate = new ProductsCate();
         foreach ($res['data'] as &$item){

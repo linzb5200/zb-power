@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home\Products;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Home\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Models\Products\Products;
 use App\Models\Products\ProductsCate;
 
@@ -84,9 +85,15 @@ class ProductsController extends Controller
 
         $model = new Products();
         $info = $model->getInfo($id);
+        $otherAttr = $model->otherAttr;//获取其他属性
         $channel = $this->getChannel($arg,$info);
 
-        return view('home.products.show',compact(['info','channel']));
+
+        $info['clicks'] = $info['clicks'] + 1;
+        $model->where('id','=',$id)->update(['clicks'=>$info['clicks']]);
+
+
+        return view('home.products.show',compact(['info','channel','otherAttr']));
     }
 
     //获取详情页导航
