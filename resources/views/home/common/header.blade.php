@@ -2,7 +2,7 @@
 <div class="fly-header layui-bg-black">
     <div class="layui-container">
         <a class="fly-logo" href="/">
-            <img src="/static/home/images/logo1.png" alt="layui">
+            <img src="/static/home/images/logo.png" alt="layui">
         </a>
 
         <ul class="layui-nav layui-layout-left layui-bg-white " lay-filter="">
