@@ -302,7 +302,7 @@
         //,pageBreakTag:'_ueditor_page_break_tag_'
 
         //autotypeset
-        //自动排版参数
+        //自动排版参数1
         ,autotypeset: {
            mergeEmptyline: true,           //合并空行
            removeClass: true,              //去掉冗余的class
