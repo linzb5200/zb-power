@@ -474,10 +474,19 @@ function img2crop($image, $w, $h=null){
 /**
  * 图片压缩
  */
-function img2Resize($image,$w,$h=null) {
-    $height = Image::make($image)->height();
-    $h = $h ? $h : $height;
-    Image::make($image)->resize($w, $h)->save($image);
+function img2Resize($image,$w=null,$h=null) {
+    $img = Image::make($image);
+    $width = $img->width();
+    $w = $w ? $w : $width ;
+
+    if(empty($h)){
+        $img->resize(700, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($image);
+    }else{
+        $img->resize($w, $h)->save($image);
+    }
+
     return true;
 }
 /**
