@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Common;
 
+use app\Helpers\Util\ImgCompress;
 use App\Traits\Msg;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -91,6 +92,13 @@ class UploadController extends Controller
                 $w = $request->input('w','');
                 $h = $request->input('h','');
                 if($w) img2Resize(public_path().$newFolder.$newName,$w,$h);
+
+                //====== 无损压缩图片======
+                $source =  public_path().$newFolder.$newName;//原图片名称
+                $dst_img = $source;//压缩后图片的名称
+                $percent = 1;  #原图压缩，不缩放，但体积大大降低
+                $ImgCompress = new ImgCompress($source,$percent);
+                $ImgCompress->compressImg($dst_img);
 
                 $pic = [
                     'from'      => $this->member && isset($this->member['from']) ? $this->member['from'] : '',
@@ -266,9 +274,17 @@ class UploadController extends Controller
                 $url = Storage::disk($disk)->url($newPath);
 
                 //剪切压缩
-                $w = $request->input('w','');
-                $h = $request->input('h','');
+                $w = $request->input('w',700);
+                $h = $request->input('h',null);
                 if($w) img2Resize(public_path().$newFolder.$newName,$w,$h);
+
+                //====== 无损压缩图片======
+                $source =  public_path().$newFolder.$newName;//原图片名称
+                $dst_img = $source;//压缩后图片的名称
+                $percent = 1;  #原图压缩，不缩放，但体积大大降低
+                $ImgCompress = new ImgCompress($source,$percent);
+                $ImgCompress->compressImg($dst_img);
+
 
                 $pic = [
                     'from'      => $this->member && isset($this->member['from']) ? $this->member['from'] : '',
