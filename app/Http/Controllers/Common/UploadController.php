@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Common;
 
+use Intervention\Image\ImageManagerStatic as Image;
 use app\Helpers\Util\ImgCompress;
 use App\Traits\Msg;
 use Illuminate\Http\Request;
@@ -48,6 +49,7 @@ class UploadController extends Controller
         //上传文件最大大小,单位M
         $maxSize = 10;
         //支持的上传图片类型 pptx|ppt|xlsx|xltm|docx|doc
+        $allowImgs = ["png", "jpg", "jpeg", "gif"];
         $allowed_extensions = ["png", "jpg", "gif","ppt","pptx","xlsx","xltm","docx","doc"];
         //返回信息json
         $data = ['code'=>200, 'msg'=>'上传失败', 'data'=>''];
@@ -88,17 +90,21 @@ class UploadController extends Controller
                 //获取文件url
                 $url = Storage::disk($disk)->url($newPath);
 
-                //剪切压缩
-                $w = $request->input('w','');
-                $h = $request->input('h','');
-                if($w) img2Resize(public_path().$newFolder.$newName,$w,$h);
+                //检测图片类型,图片就压缩
+                if (!in_array(strtolower($ext),$allowImgs)){
+                    //剪切压缩
+                    $w = $request->input('w','');
+                    $h = $request->input('h','');
+                    if($w) img2Resize(public_path().$newFolder.$newName,$w,$h);
 
-                //====== 无损压缩图片======
-                $source =  public_path().$newFolder.$newName;//原图片名称
-                $dst_img = $source;//压缩后图片的名称
-                $percent = 1;  #原图压缩，不缩放，但体积大大降低
-                $ImgCompress = new ImgCompress($source,$percent);
-                $ImgCompress->compressImg($dst_img);
+                    //====== 无损压缩图片======
+                    $source =  public_path().$newFolder.$newName;//原图片名称
+                    $dst_img = $source;//压缩后图片的名称
+                    $percent = 1;  #原图压缩，不缩放，但体积大大降低
+                    $ImgCompress = new ImgCompress($source,$percent);
+                    $ImgCompress->compressImg($dst_img);
+
+                }
 
                 $pic = [
                     'from'      => $this->member && isset($this->member['from']) ? $this->member['from'] : '',
@@ -234,7 +240,8 @@ class UploadController extends Controller
         //上传文件最大大小,单位M
         $maxSize = 10;
         //支持的上传图片类型
-        $allowed_extensions = ["png", "jpg", "gif"];
+        $allowImgs = ["png", "jpg", "jpeg", "gif"];
+        $allowed_extensions = ["png", "jpg", "jpeg", "gif"];
         //返回信息json
         $data = ['state'=>'ERROR', 'msg'=>'上传失败', 'data'=>''];
 
@@ -273,17 +280,29 @@ class UploadController extends Controller
                 //获取文件url
                 $url = Storage::disk($disk)->url($newPath);
 
-                //剪切压缩
-                $w = $request->input('w',700);
-                $h = $request->input('h',null);
-                if($w) img2Resize(public_path().$newFolder.$newName,$w,$h);
+                //检测图片类型,图片就压缩
+                if (!in_array(strtolower($ext),$allowImgs)){
+                    //剪切压缩
+                    $w = $request->input('w',700);
+                    $h = $request->input('h',null);
+                    $imag = public_path().$newFolder.$newName;
+                    $img = Image::make($imag);
+                    $width = $img->width();
+                    if($width > 700){
+                        $w = 700;
+                    }else{
+                        $w = $width;
+                    }
+                    if($w) img2Resize($imag,$w,$h);
 
-                //====== 无损压缩图片======
-                $source =  public_path().$newFolder.$newName;//原图片名称
-                $dst_img = $source;//压缩后图片的名称
-                $percent = 1;  #原图压缩，不缩放，但体积大大降低
-                $ImgCompress = new ImgCompress($source,$percent);
-                $ImgCompress->compressImg($dst_img);
+                    //====== 无损压缩图片======
+                    $source =  public_path().$newFolder.$newName;//原图片名称
+                    $dst_img = $source;//压缩后图片的名称
+                    $percent = 1;  #原图压缩，不缩放，但体积大大降低
+                    $ImgCompress = new ImgCompress($source,$percent);
+                    $ImgCompress->compressImg($dst_img);
+
+                }
 
 
                 $pic = [
