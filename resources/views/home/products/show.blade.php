@@ -55,7 +55,7 @@
                     <div class="detail-body photos">
                         {!!$info['content']!!}
                         <p>
-                            本作品内容为{{$info['title']}}， 格式为 {{$info['format']}}， 大小{{ $info['size'] }}Mb ， 页数为{{$info['page']}}， 请使用软件{{$info['soft']}}打开， 作品中文字及图均可以修改和编辑，图片更改请在作品中右键图片并更换，文字修改请直接点击文字进行修改，也可以新增和删除作品中的内容， 欢迎使用。 该资源来自用户分享，如果损害了你的权利，请联系网站客服处理。
+                            本作品内容为{{$info['title']}}， 格式为 {{$info['format']}}， 大小{{ $info['size'] }}Mb ， 页数为{{$info['page']}}， 请推荐使用软件 @foreach($otherAttr['soft'] as $osk => $name) @if($info['soft'] == $osk) {{$name}} @endif @endforeach 打开， 作品中文字及图均可以修改和编辑，图片更改请在作品中右键图片并更换，文字修改请直接点击文字进行修改，也可以新增和删除作品中的内容， 欢迎使用。 该资源来自用户分享，如果损害了你的权利，请联系网站客服处理。
                         </p>
                     </div>
                 </div>
