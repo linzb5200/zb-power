@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Common;
 
+use Intervention\Image\ImageManagerStatic as Image;
 use app\Helpers\Util\ImgCompress;
 use App\Traits\Msg;
 use Illuminate\Http\Request;
@@ -284,7 +285,15 @@ class UploadController extends Controller
                     //剪切压缩
                     $w = $request->input('w',700);
                     $h = $request->input('h',null);
-                    if($w) img2Resize(public_path().$newFolder.$newName,$w,$h);
+                    $imag = public_path().$newFolder.$newName;
+                    $img = Image::make($imag);
+                    $width = $img->width();
+                    if($width > 700){
+                        $w = 700;
+                    }else{
+                        $w = $width;
+                    }
+                    if($w) img2Resize($imag,$w,$h);
 
                     //====== 无损压缩图片======
                     $source =  public_path().$newFolder.$newName;//原图片名称
