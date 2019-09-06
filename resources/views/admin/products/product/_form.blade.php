@@ -72,18 +72,18 @@
 <div class="layui-form-item">
     <label for="" class="layui-form-label">软件</label>
     <div class="layui-input-block">
-        <input type="radio" name="soft" value="1" title="PowerPoint 2003" @if($data->soft == 1) checked @endif>
-        <input type="radio" name="soft" value="2" title="PowerPoint 2007" @if($data->soft == 2) checked @endif>
-        <input type="radio" name="soft" value="3" title="PowerPoint 2010" @if($data->soft == 3) checked @endif>
-        <input type="radio" name="soft" value="4" title="PowerPoint 2016" @if($data->soft == 4) checked @endif>
-        <input type="radio" name="soft" value="5" title="其他版本" @if($data->soft == 5) checked @endif>
+        <input type="radio" name="soft" value="1" title="PowerPoint 2003" @if(isset($data) && $data->soft == 1) checked @endif>
+        <input type="radio" name="soft" value="2" title="PowerPoint 2007" @if(isset($data) && $data->soft == 2) checked @endif>
+        <input type="radio" name="soft" value="3" title="PowerPoint 2010" @if(isset($data) && $data->soft == 3) checked @endif>
+        <input type="radio" name="soft" value="4" title="PowerPoint 2016" @if(isset($data) && $data->soft == 4) checked @endif>
+        <input type="radio" name="soft" value="5" title="其他版本" @if(isset($data) && $data->soft == 5) checked @endif>
     </div>
 </div>
 <div class="layui-form-item">
     <label for="" class="layui-form-label">类型</label>
     <div class="layui-input-block">
-        <input type="radio" name="type" value="1" title="动态" @if($data->type == 1) checked @endif>
-        <input type="radio" name="type" value="2" title="静态" @if($data->type == 2) checked @endif>
+        <input type="radio" name="type" value="1" title="动态" @if(isset($data) && $data->type == 1) checked @endif>
+        <input type="radio" name="type" value="2" title="静态" @if(isset($data) && $data->type == 2) checked @endif>
     </div>
 </div>
 
