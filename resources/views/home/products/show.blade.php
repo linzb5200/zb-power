@@ -26,6 +26,8 @@
                 <div class="fly-panel detail-box">
                     <h1>{{$info['title']}}</h1>
                     <div class="fly-detail-info">
+
+                        <div style="display: none">
                         <!-- <span class="layui-badge">审核中</span> -->
                         <span class="layui-badge layui-bg-green fly-detail-column">动态</span>
 
@@ -34,8 +36,9 @@
 
                         <span class="layui-badge layui-bg-black">置顶</span>
                         <span class="layui-badge layui-bg-red">精帖</span>
+                        </div>
 
-                        <div class="fly-admin-box" data-id="123">
+                        <div class="fly-admin-box" data-id="123" style="display:none;">
                             <span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>
 
                             <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">置顶</span>
@@ -45,14 +48,14 @@
                             <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> -->
                         </div>
                         <span class="fly-list-nums">
-                            <a href="#comment"><i class="iconfont" title="回答">&#xe60c;</i> 66</a>
-                            <i class="iconfont" title="人气">&#xe60b;</i> 99999
+                            <a href="#comment"><i class="layui-icon">&#xe600;</i> {{ $info['fav']+$info['rand_fav'] }}</a>
+                            <i class="iconfont" title="人气">&#xe60b;</i> {{ $info['clicks']+$info['rand_clicks'] }}
                         </span>
                     </div>
                     <div class="detail-body photos">
                         {!!$info['content']!!}
                         <p>
-                            本作品内容为{{$info['title']}}， 格式为 {{$info['format']}}， 大小{{ getSize($info['size']) }} ， 页数为{{$info['page']}}， 请使用软件{{$info['soft']}}打开， 作品中文字及图均可以修改和编辑，图片更改请在作品中右键图片并更换，文字修改请直接点击文字进行修改，也可以新增和删除作品中的内容， 欢迎使用。 该资源来自用户分享，如果损害了你的权利，请联系网站客服处理。
+                            本作品内容为{{$info['title']}}， 格式为 {{$info['format']}}， 大小{{ $info['size'] }}Mb ， 页数为{{$info['page']}}， 请使用软件{{$info['soft']}}打开， 作品中文字及图均可以修改和编辑，图片更改请在作品中右键图片并更换，文字修改请直接点击文字进行修改，也可以新增和删除作品中的内容， 欢迎使用。 该资源来自用户分享，如果损害了你的权利，请联系网站客服处理。
                         </p>
                     </div>
                 </div>
@@ -71,11 +74,11 @@
                         <ul class="tb">
                             <li class="clearfix">
                                 <div class="fl th">图片编号</div>
-                                <div class="td">1891268</div>
+                                <div class="td">{{strtotime($info['created_at'])}}{{ $info['id'] }}</div>
                             </li>
                             <li class="clearfix">
                                 <div class="fl th">文件大小</div>
-                                <div class="td">{{ getSize($info['size']) }}</div>
+                                <div class="td">{{ $info['size'] }}Mb</div>
                             </li>
                             @if($info['page'] > 0)
                             <li class="clearfix">
@@ -85,12 +88,16 @@
                             @endif
                             <li class="clearfix format">
                                 <div class="fl th">文件格式</div>
-                                <div class="td">docx</div>
+                                <div class="td">{{$info['format']}}</div>
                             </li>
                             @if($info['scale'])
                             <li class="clearfix format">
                                 <div class="fl th">比例</div>
-                                <div class="td">{{$info['scale']}}</div>
+                                <div class="td">
+                                    @foreach($otherAttr['scale'] as $osk => $name)
+                                        @if($arg['scale'] == $osk) {{$name}} @endif
+                                    @endforeach
+                                </div>
                             </li>
                             @endif
                             @if(isset($info['auth']) && $info['auth'])
@@ -101,7 +108,11 @@
                             @endif
                             <li class="clearfix">
                                 <div class="fl th">推荐软件</div>
-                                <div class="td">{{$info['soft']}}</div>
+                                <div class="td">
+                                    @foreach($otherAttr['soft'] as $osk => $name)
+                                        @if($info['soft'] == $osk) {{$name}} @endif
+                                    @endforeach
+                                </div>
                             </li>
                             <li class="clearfix">
                                 <div class="fl th">上传时间</div>

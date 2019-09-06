@@ -480,7 +480,7 @@ function img2Resize($image,$w=null,$h=null) {
     $w = $w ? $w : $width ;
 
     if(empty($h)){
-        $img->resize(700, null, function ($constraint) {
+        $img->resize($w, null, function ($constraint) {
             $constraint->aspectRatio();
         })->save($image);
     }else{
