@@ -28,14 +28,14 @@
                     <div class="fly-detail-info">
 
                         <div style="display: none">
-                        <!-- <span class="layui-badge">审核中</span> -->
-                        <span class="layui-badge layui-bg-green fly-detail-column">动态</span>
+                            <!-- <span class="layui-badge">审核中</span> -->
+                            <span class="layui-badge layui-bg-green fly-detail-column">动态</span>
 
-                        <span class="layui-badge" style="background-color: #999;">未结</span>
-                        <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
+                            <span class="layui-badge" style="background-color: #999;">未结</span>
+                            <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
 
-                        <span class="layui-badge layui-bg-black">置顶</span>
-                        <span class="layui-badge layui-bg-red">精帖</span>
+                            <span class="layui-badge layui-bg-black">置顶</span>
+                            <span class="layui-badge layui-bg-red">精帖</span>
                         </div>
 
                         <div class="fly-admin-box" data-id="123" style="display:none;">
@@ -55,7 +55,7 @@
                     <div class="detail-body photos">
                         {!!$info['content']!!}
                         <p>
-                            本作品内容为{{$info['title']}}， 格式为 {{$info['format']}}， 大小{{ $info['size'] }}Mb ， 页数为{{$info['page']}}， 请使用软件{{$info['soft']}}打开， 作品中文字及图均可以修改和编辑，图片更改请在作品中右键图片并更换，文字修改请直接点击文字进行修改，也可以新增和删除作品中的内容， 欢迎使用。 该资源来自用户分享，如果损害了你的权利，请联系网站客服处理。
+                            本作品内容为{{$info['title']}}， 格式为 {{$info['format']}}， 大小{{ $info['size'] }}Mb ， 页数为{{$info['page']}}， 请推荐使用软件 @foreach($otherAttr['soft'] as $osk => $name) @if($info['soft'] == $osk) {{$name}} @endif @endforeach 打开， 作品中文字及图均可以修改和编辑，图片更改请在作品中右键图片并更换，文字修改请直接点击文字进行修改，也可以新增和删除作品中的内容， 欢迎使用。 该资源来自用户分享，如果损害了你的权利，请联系网站客服处理。
                         </p>
                     </div>
                 </div>
@@ -81,30 +81,30 @@
                                 <div class="td">{{ $info['size'] }}Mb</div>
                             </li>
                             @if($info['page'] > 0)
-                            <li class="clearfix">
-                                <div class="fl th">页数</div>
-                                <div class="td">{{$info['page']}}</div>
-                            </li>
+                                <li class="clearfix">
+                                    <div class="fl th">页数</div>
+                                    <div class="td">{{$info['page']}}</div>
+                                </li>
                             @endif
                             <li class="clearfix format">
                                 <div class="fl th">文件格式</div>
                                 <div class="td">{{$info['format']}}</div>
                             </li>
                             @if($info['scale'])
-                            <li class="clearfix format">
-                                <div class="fl th">比例</div>
-                                <div class="td">
-                                    @foreach($otherAttr['scale'] as $osk => $name)
-                                        @if($arg['scale'] == $osk) {{$name}} @endif
-                                    @endforeach
-                                </div>
-                            </li>
+                                <li class="clearfix format">
+                                    <div class="fl th">比例</div>
+                                    <div class="td">
+                                        @foreach($otherAttr['scale'] as $osk => $name)
+                                            @if($arg['scale'] == $osk) {{$name}} @endif
+                                        @endforeach
+                                    </div>
+                                </li>
                             @endif
                             @if(isset($info['auth']) && $info['auth'])
-                            <li class="clearfix">
-                                <div class="fl th">作者</div>
-                                <div class="td">{{$info['auth']}}</div>
-                            </li>
+                                <li class="clearfix">
+                                    <div class="fl th">作者</div>
+                                    <div class="td">{{$info['auth']}}</div>
+                                </li>
                             @endif
                             <li class="clearfix">
                                 <div class="fl th">推荐软件</div>
