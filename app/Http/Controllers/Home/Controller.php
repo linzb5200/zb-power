@@ -2,13 +2,25 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Models\Color;
+use App\Models\Style;
+use App\Models\Trades;
 use App\Models\Products\ProductsCate;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class Controller extends BaseController
 {
+    use ValidatesRequests;
+
+    protected $user;
     protected $settings;
-    protected $navs;
+    protected $nav;
+    protected $costCate;
+    protected $costColors;
+    protected $costStyles;
+    protected $costTrades;
+
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
@@ -16,8 +28,24 @@ class Controller extends BaseController
             view()->share('settings',$this->settings);
 
             $model = new ProductsCate();
-            $this->navs = $model->getCacheList(1);
-            view()->share('navs',$this->navs);
+            $this->nav = $model->getCacheList(1);
+            view()->share('nav',$this->nav);
+
+            $modelCate = new ProductsCate();
+            $this->costCate = $modelCate->getCacheList();
+            view()->share('costCate',$this->costCate);
+
+            $modelColor = new Color();
+            $this->costColors = $modelColor->getCacheList();
+            view()->share('costColors',$this->costColors);
+
+            $modelStyle = new Style();
+            $this->costStyles = $modelStyle->getCacheList();
+            view()->share('costStyles',$this->costStyles);
+
+            $modelTrades = new Trades();
+            $this->costTrades = $modelTrades->getCacheList();
+            view()->share('costTrades',$this->costTrades);
 
             return $next($request);
         });

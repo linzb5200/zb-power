@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Products;
 use App\Models\Style;
 use App\Models\Tag;
 use App\Models\Color;
+use App\Models\Trades;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Products\Products;
@@ -31,6 +32,8 @@ class ProductsController extends Controller
             'rand_download' =>'nullable|numeric',
             'size' =>'nullable|numeric',
             'format' =>'nullable',
+            'soft' =>'nullable',
+            'type' =>'nullable',
             'page' =>'nullable',
             'thumb' =>'nullable|numeric',
             'attachment' =>'nullable',
@@ -102,6 +105,7 @@ class ProductsController extends Controller
         $tags = Tag::get();
         $colors = Color::get();
         $styles = Style::get();
+        $trades = Trades::get();
 
         $count = 0;
         $created_at = date('Y-m-d H:i:s');
@@ -121,7 +125,7 @@ class ProductsController extends Controller
 
 
 
-        return view('admin.products.product.create',compact(['cate_list','tags','colors','styles','created_at']));
+        return view('admin.products.product.create',compact(['cate_list','tags','colors','styles','trades','created_at']));
     }
 
     /**
@@ -150,6 +154,10 @@ class ProductsController extends Controller
         $styles = $request['style'];
         if ($product && !empty($styles) ){
             $product->styles()->sync($styles);
+        }
+        $trades = $request['trades'];
+        if ($product && !empty($trades) ){
+            $product->trades()->sync($trades);
         }
         return redirect(route('admin.products'))->with(['status'=>'添加完成']);
 
@@ -193,11 +201,14 @@ class ProductsController extends Controller
         foreach ($styles as $style){
             $style->checked = $data->styles->contains($style) ? 'checked' : '';
         }
+        $trades = Trades::get();
+        foreach ($trades as $trade){
+            $trade->checked = $data->trades->contains($trade) ? 'checked' : '';
+        }
         $created_at = date('Y-m-d H:i:s');
-
         // 图集处理
         $images = explode(',', $data->attachment);
-        return view('admin.products.product.edit',compact(['cate_list','data','images','tags','colors','styles','created_at']));
+        return view('admin.products.product.edit',compact(['cate_list','data','images','tags','colors','styles','trades','created_at']));
     }
 
     /**
@@ -234,6 +245,10 @@ class ProductsController extends Controller
             $styles = $request['style'];
             if ($product && !empty($styles) ){
                 $product->styles()->sync($styles);
+            }
+            $trades = $request['trades'];
+            if ($product && !empty($trades) ){
+                $product->trades()->sync($trades);
             }
 
             //删除旧的缩略图

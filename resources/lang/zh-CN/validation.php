@@ -149,6 +149,7 @@ return [
         'email'                 => '邮箱',
         'first_name'            => '名',
         'last_name'             => '姓',
+        'nowpass'               => '当前密码',
         'password'              => '密码',
         'password_confirmation' => '确认密码',
         'city'                  => '城市',

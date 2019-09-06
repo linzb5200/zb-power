@@ -18,7 +18,31 @@ class Products extends Model
      */
 
     protected $fillable = [
-        'cate_id','cate_str','title','keywords','description','color','tag', 'points','size','clicks','fav','zan','used','download','rand_clicks','rand_fav','rand_zan','rand_used','rand_download','format','page','thumb','attachment','content','sort','status','created_at','updated_at'
+        'cate_id','cate_str','title','keywords','description','color','tag', 'points','size','clicks','fav','zan','used','download','rand_clicks','rand_fav','rand_zan','rand_used','rand_download','soft','type','format','page','thumb','attachment','content','sort','status','created_at','updated_at'
+    ];
+    public $otherAttr = [
+        'soft'=>[
+            1=>'PowerPoint 2003',
+            2=>'PowerPoint 2007',
+            3=>'PowerPoint 2010',
+            4=>'PowerPoint 2016',
+            5=>'其他版本',
+        ],
+        'type'=>[
+            1=>'动态模版',
+            2=>'静态模版',
+        ],
+        'scale'=>[
+            1=>'宽屏16:9',
+            2=>'普屏4:3',
+            3=>'竖屏A4',
+        ],
+        'sort'=>[
+            1=>'综合排序',
+            2=>'热门下载',
+            3=>'最多收藏',
+            4=>'最新上传',
+        ]
     ];
 
     //文章所属分类
@@ -41,6 +65,11 @@ class Products extends Model
     public function styles()
     {
         return $this->belongsToMany('App\Models\Style','products_style','product_id','style_id');
+    }
+    //与行业配置多对多关联
+    public function trades()
+    {
+        return $this->belongsToMany('App\Models\Trades','products_trade','product_id','trade_id');
     }
 
     public function getInfo($id = 0){
@@ -85,13 +114,6 @@ class Products extends Model
                     ->get()->toArray();
 
                 if($items){
-                    foreach ($items as &$item )
-                    {
-                        $cate = $children[$item['cate_id']];
-                        $item['pinyin_1'] = $top['pinyin'];
-                        $item['pinyin_2'] = $cate['pinyin'];
-                        $item['url'] = "/".$item['pinyin_1']."/".$item['pinyin_2']."/".$item['id'];
-                    }
                     $hots[$id] = $items;
                 }
 

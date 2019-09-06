@@ -46,7 +46,46 @@ function getSql(){
     });
 
 }
+/**
+ * 同时更新多个记录
+ */
+function updateBatch($tableName,$multipleData = [])
+{
+    try {
+        if (empty($multipleData)) {
+            throw new \Exception("数据不能为空");
+        }
+        $firstRow  = current($multipleData);
 
+        $updateColumn = array_keys($firstRow);
+        // 默认以id为条件更新，如果没有ID则以第一个字段为条件
+        $referenceColumn = isset($firstRow['id']) ? 'id' : current($updateColumn);
+        unset($updateColumn[0]);
+        // 拼接sql语句
+        $updateSql = "UPDATE " . $tableName . " SET ";
+        $sets      = [];
+        $bindings  = [];
+        foreach ($updateColumn as $uColumn) {
+            $setSql = "`" . $uColumn . "` = CASE ";
+            foreach ($multipleData as $data) {
+                $setSql .= "WHEN `" . $referenceColumn . "` = ? THEN ? ";
+                $bindings[] = $data[$referenceColumn];
+                $bindings[] = $data[$uColumn];
+            }
+            $setSql .= "ELSE `" . $uColumn . "` END ";
+            $sets[] = $setSql;
+        }
+        $updateSql .= implode(', ', $sets);
+        $whereIn   = collect($multipleData)->pluck($referenceColumn)->values()->all();
+        $bindings  = array_merge($bindings, $whereIn);
+        $whereIn   = rtrim(str_repeat('?,', count($whereIn)), ',');
+        $updateSql = rtrim($updateSql, ", ") . " WHERE `" . $referenceColumn . "` IN (" . $whereIn . ")";
+        // 传入预处理sql语句和对应绑定数据
+        return DB::update($updateSql, $bindings);
+    } catch (\Exception $e) {
+        return false;
+    }
+}
 /**
  * 获取搜索条件
  */
@@ -165,7 +204,14 @@ function getMap($query, $temp)
 function getArg($args){
     $arr = [];
     foreach ($args as $arg){
-        $arr[$arg] = request()->route($arg);
+        $v = request()->route($arg);
+        if($v == null && $v != '0' && in_array($arg,['color','style','trade','soft','type','scale'])){
+            $v = '0';
+        }
+        if($v == null && $v != '0' && in_array($arg,['sort','page'])){
+            $v = '1';
+        }
+        $arr[$arg] = $v;
     }
     return $arr;
 }
@@ -266,9 +312,9 @@ function sendMailer($to, $subject, $body)
         $mail->AltBody = '邮件客户端不支持HTML';
 
         $mail->send();
-        return ['status'=>1,'msg'=>'邮件发送成功'];
+        return ['status'=>0,'msg'=>'邮箱验证码已发送成功，请登录邮箱查看'];
     } catch (Exception $e) {
-        return ['status'=>0,'msg'=>'邮件发送失败'. $mail->ErrorInfo];
+        return ['status'=>1099,'msg'=>'邮件发送失败'. $mail->ErrorInfo];
     }
 }
 
@@ -488,4 +534,81 @@ function getCateStr($str,$splt='/')
     $new = implode($splt,$new);
 
     return $new;
+}
+
+//字母标记数组
+function getZm($array)
+{
+    $str = 'a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z';
+    $zm = explode('|',$str);
+    foreach ($array as $k => &$arr){
+        $arr['zm'] = $zm[$k];
+    }
+    return $array;
+}
+
+//产品列表页分页伪静态
+function myPageUrl($url = '')
+{
+
+    $arr     = parse_url($url);
+
+    $query = [];
+    if(isset($arr['query'])){
+        parse_str($arr['query'],$query);
+    }
+
+
+    if(isset($query['cate'])){
+        $query['cate'] = '/'.$query['cate']."/";
+    }
+    if(isset($query['zm'])){
+        $query['zm'] = $query['zm']."/";
+    }
+
+    $args = array_values($query);
+
+    $url = implode('',$args).'.html';
+
+    return $url;
+
+}
+
+
+/**
+ * 计算几分钟前、几小时前、几天前、几月前、几年前。
+ * $agoTime string Unix时间
+ * @author tangxinzhuan
+ * @version 2016-10-28
+ */
+function timeAgo($agoTime)
+{
+    if(!is_numeric($agoTime)){
+        $agoTime = strtotime($agoTime);
+    }
+
+    // 计算出当前日期时间到之前的日期时间的毫秒数，以便进行下一步的计算
+    $time = time() - $agoTime;
+
+    if ($time >= 31104000) { // N年前
+        $num = (int)($time / 31104000);
+        return $num . '年前';
+    }
+    if ($time >= 2592000) { // N月前
+        $num = (int)($time / 2592000);
+        return $num . '月前';
+    }
+    if ($time >= 86400) { // N天前
+        $num = (int)($time / 86400);
+        return $num . '天前';
+    }
+    if ($time >= 3600) { // N小时前
+        $num = (int)($time / 3600);
+        return $num . '小时前';
+    }
+    if ($time > 60) { // N分钟前
+        $num = (int)($time / 60);
+        return $num . '分钟前';
+    }
+    return '1分钟前';
 }

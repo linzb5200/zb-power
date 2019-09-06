@@ -46,6 +46,22 @@
     </div>
 </div>
 <div class="layui-form-item">
+    <label for="" class="layui-form-label">风格</label>
+    <div class="layui-input-block">
+        @foreach($styles as $style)
+            <input type="checkbox" name="style[]" value="{{$style['id']}}" title="{{$style['name']}}" {{ $style->checked??'' }}>
+        @endforeach
+    </div>
+</div>
+<div class="layui-form-item">
+    <label for="" class="layui-form-label">行业</label>
+    <div class="layui-input-block">
+        @foreach($trades as $trade)
+            <input type="checkbox" name="trades[]" value="{{$trade['id']}}" title="{{$trade['name']}}" {{ $trade->checked??'' }}>
+        @endforeach
+    </div>
+</div>
+<div class="layui-form-item">
     <label for="" class="layui-form-label">颜色</label>
     <div class="layui-input-block">
         @foreach($colors as $color)
@@ -54,11 +70,20 @@
     </div>
 </div>
 <div class="layui-form-item">
-    <label for="" class="layui-form-label">风格</label>
+    <label for="" class="layui-form-label">软件</label>
     <div class="layui-input-block">
-        @foreach($styles as $style)
-            <input type="checkbox" name="style[]" value="{{$style['id']}}" title="{{$style['name']}}" {{ $style->checked??'' }}>
-        @endforeach
+        <input type="radio" name="soft" value="1" title="PowerPoint 2003" @if($data->soft == 1) checked @endif>
+        <input type="radio" name="soft" value="2" title="PowerPoint 2007" @if($data->soft == 2) checked @endif>
+        <input type="radio" name="soft" value="3" title="PowerPoint 2010" @if($data->soft == 3) checked @endif>
+        <input type="radio" name="soft" value="4" title="PowerPoint 2016" @if($data->soft == 4) checked @endif>
+        <input type="radio" name="soft" value="5" title="其他版本" @if($data->soft == 5) checked @endif>
+    </div>
+</div>
+<div class="layui-form-item">
+    <label for="" class="layui-form-label">类型</label>
+    <div class="layui-input-block">
+        <input type="radio" name="type" value="1" title="动态" @if($data->type == 1) checked @endif>
+        <input type="radio" name="type" value="2" title="静态" @if($data->type == 2) checked @endif>
     </div>
 </div>
 
@@ -190,7 +215,7 @@
     </div>
 </div>
 
-<div class="layui-form-item">
+<div class="layui-form-item" style="position: fixed;z-index:9999;bottom: 5px;margin-top: 5px;">
     <div class="layui-input-block">
         <button type="submit" class="layui-btn" lay-submit="" lay-filter="formDemo">确 认</button>
         <a  class="layui-btn" href="{{route('admin.products')}}" >返 回</a>

@@ -17,7 +17,7 @@ class ProductsCate extends Model
      * @var array
      */
     protected $fillable = [
-        'parent_id','title', 'route','pinyin','clicks','recommend', 'sort','status','tag'
+        'parent_id','title', 'route','zm','pinyin','clicks','recommend', 'sort','status','tag'
     ];
 
     /*
@@ -28,7 +28,7 @@ class ProductsCate extends Model
         if(is_numeric($id)) {
             return $this->where('id', $id)->first()->toArray();
         }
-        $info = $this->where('pinyin', $id)->first()->toArray();
+        $info = $this->where('zm', $id)->first()->toArray();
         return $info;
     }
 
@@ -58,8 +58,6 @@ class ProductsCate extends Model
     public function getCacheList($tree='')
     {
         $items = Cache::get($this->table.$tree);
-
-        $items = [];
         if(empty($items)){
             $items = $this->orderBy('sort', 'ASC')->get()->toArray();
 
@@ -143,4 +141,16 @@ class ProductsCate extends Model
         return $data;
     }
 
+
+    /*
+    * 更新字母标记
+    */
+    public function zm($fid =0)
+    {
+        if(empty($fid)) return false;
+        $child = $this->where('parent_id',$fid)->select('id', 'zm')->orderBy('sort','asc')->get()->toArray();
+        $child = getZm($child);
+        updateBatch($this->table,$child);
+        return true;
+    }
 }

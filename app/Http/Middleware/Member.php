@@ -17,7 +17,7 @@ class Member
     public function handle($request, Closure $next)
     {
         if (Auth::guard('member')->guest()){
-            return redirect(route('home.member.showLoginForm'));
+            return redirect(route('home.user.showLoginForm'));
         }
         return $next($request);
     }

@@ -2,103 +2,116 @@
 @section('style')
 
 @endsection
+
 @section('content')
-    <div class="banner">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="{{asset('static/home/img/banner/banner1.jpg')}}" alt="">
+<div class="fly-banner">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+
+                <div class="fly-case-header">
+                    <p class="fly-case-year"> YOMORE IS EBERYWHERE</p>
+                    <p class="fly-case-slogan">嘿，等你很久了</p>
                 </div>
-                <div class="swiper-slide">
-                    <img src="{{asset('static/home/img/banner/banner2.jpg')}}" alt="">
-                </div>
-                <div class="swiper-slide">
-                    <img src="{{asset('static/home/img/banner/banner3.jpg')}}" alt="">
-                </div>
+
             </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
+            <div class="swiper-slide">
+
+                <div class="fly-case-header">
+                    <p class="fly-case-year"></p>
+                    <p class="fly-case-slogan">Hey，听说你要份求职简历？</p>
+
+                </div>
+
+            </div>
+            <div class="swiper-slide">
+
+                <div class="fly-case-header">
+                    <p class="fly-case-year" style="font-size: 40px"> Never forget why you started and you accomplish
+                        your mission </p>
+                    <p class="fly-case-slogan">愿你归来 仍是少年</p>
+                </div>
+
+            </div>
+            <div class="swiper-slide">
+
+                <div class="fly-case-header">
+                    <p class="fly-case-year">LESS IS MORE</p>
+                    <p class="fly-case-slogan">简约及是美</p>
+
+                </div>
+
+            </div>
+            <div class="swiper-slide">
+
+                <div class="fly-case-header">
+                    <p class="fly-case-year">GRADUATION SEASON SO YOUNG </p>
+                    <p class="fly-case-slogan">毕业季 致青春</p>
+
+                </div>
+
+            </div>
         </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
     </div>
-    <div class="search-box">
+</div>
 
-        <form class="layui-form search-form" action="/search">
-            {{csrf_field()}}
-            <div class="layui-form-item">
+<div class="fly-search-index search-area">
+    @include('home.common.search')
+</div>
 
-                <div class="layui-inline">
-                    <select name="id" class="layui-input layui-bg-gray" lay-verify="required">
-                        <option value=""></option>
-                        @foreach($navs as $key => $nav)
-                        <option value="/{{$nav['pinyin']}}/">{{$nav['title']}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="layui-inline">
-                    <input type="text" name="keyword" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input input">
-                </div>
-                <div class="layui-inline pull-right">
-                    <button class="layui-btn layui-btn-primary btn-search" lay-submit lay-filter="searchForm">搜索</button>
-                </div>
+<div class="fly-main" style="overflow: hidden;">
 
-            </div>
-        </form>
+    @foreach($nav as $key => $nv)
+        @if($nv['recommend'] == 1)
+    <div class="layui-tab layui-tab-brief">
+        <ul class="layui-tab-title">
+            <li><h2 class="title">{{$nv['title']}}</h2></li>
 
-    </div>
-
-    <div class="count-box">
-        名企精英都在用的专业简历 已有 <span id="count">2033316<i class="icon posa"></i></span> 位用户在这里创建简历
-    </div>
-    <div class="main-box wrap">
-
-        @foreach($navs as $key => $nav)
-
-            @if($nav['recommend'] == 1)
-        <div class="box-title">
-            <blockquote class="layui-elem-quote">{{$nav['title']}}
-                <span class="layui-breadcrumb" lay-separator=" ">
-                    @foreach($nav['children'] as $child)
-                        @if($child['recommend'] == 1)
-                        <a href="/{{$nav['pinyin']}}/{{$child['pinyin']}}/">{{$child['title']}}</a>
-                        @endif
-                    @endforeach
-              <a href="/{{$nav['pinyin']}}/" class="fr">查看更多></a>
-            </span>
-            </blockquote>
-        </div>
-        <div class="box layui-row">
-
-            @if(isset($hots[$nav['id']]))
-            @foreach($hots[$nav['id']] as $hot)
-            <div class="layui-col-md3">
-                <div class="item">
-                    <div class="content mask">
-                        <a href="{{$hot['url']}}" target="_blank" class="pic"><img class="imgLazy"  alt="" src="{{ getImagePath($hot['thumb']) }}" width="100%"></a>
-                    </div>
-                    <div class="shadow">
-                        <a href="{{$hot['url']}}" class="layui-btn layui-btn-radius layui-btn-danger">立即下载</a>
-                        <span class="zan"><i class="fa fa-heart-o"></i></span>
-                        <span class="down"><i class="fa fa-download"></i></span>
-                    </div>
-                    <div class="title">
-                        <a href="{{$hot['url']}}" target="_blank" class="name">{{$hot['title']}}</a>
-                    </div>
-                    <div class="tools">
-                        <span class="zan"><i class="fa fa-heart-o"></i>{{$hot['fav']+$hot['rand_fav']}}</span>
-                        <span class="down"><i class="fa fa-download"></i>{{$hot['clicks']+$hot['rand_clicks']}}</span>
-                    </div>
-                </div>
-            </div>
+            @foreach($nv['children'] as $child)
+                @if($child['recommend'] == 1)
+            <li><a href="/{{$nv['zm']}}/{{$child['zm']}}/">{{$child['title']}}</a></li>
+                @endif
             @endforeach
-
-            @endif
-
-        </div>
-
-            @endif
-        @endforeach
+            <li class="fr"><a href="/{{$nv['zm']}}/">查看更多 ></a></li>
+        </ul>
     </div>
+
+    <ul class="fly-case-list">
+
+        @if(isset($hots[$nv['id']]))
+        @foreach($hots[$nv['id']] as $hot)
+        <li data-id="{{$hot['id']}}">
+            <div class="fly-case-img" href="{{route('products.show2',['zm'=>$costCate[$hot['cate_id']]['zm'],'cate'=>$nv['zm'],'id'=>$hot['id']]) }}" target="_blank">
+                <img src="{{ getImagePath($hot['thumb']) }}" alt="">
+                <div class="tool">
+                    <cite class="layui-btn layui-btn-boss layui-btn-small" href="{{route('products.show2',['zm'=>$costCate[$hot['cate_id']]['zm'],'cate'=>$nv['zm'],'id'=>$hot['id']]) }}" target="_blank" >立即下载</cite>
+                    <div class="btn">
+                        <i class="iconfont icon-zan mine-zan"></i>
+                        <i class="layui-icon mine-fav">&#xe600;</i>
+                    </div>
+                </div>
+            </div>
+
+            <h2><a href="{{route('products.show2',['zm'=>$costCate[$hot['cate_id']]['zm'],'cate'=>$nv['zm'],'id'=>$hot['id']]) }}" target="_blank">{{$hot['title']}}</a></h2>
+            <div class="fly-case-dash">
+                <button class="layui-btn layui-btn-transparent " data-type="download"><i class="fa fa-download"></i>{{$hot['download']+$hot['rand_download']}}
+                </button>
+                <button class="layui-btn layui-btn-transparent fly-case-active" data-type="praise"><i
+                            class="layui-icon">&#xe600;</i>{{$hot['fav']+$hot['rand_fav']}}
+                </button>
+            </div>
+        </li>
+
+        @endforeach
+        @endif
+    </ul>
+        @endif
+    @endforeach
+
+</div>
 @endsection
 
 @section('script')
