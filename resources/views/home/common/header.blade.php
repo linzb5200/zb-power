@@ -28,13 +28,15 @@
             <!-- 登入后的状态 -->
             <li class="layui-nav-item">
                 <a class="fly-nav-avatar" href="javascript:;">
-                    <cite class="layui-hide-xs"> </cite>
+                    <cite class="layui-hide-xs">{{ hello() }} {{ auth('member')->user()->nickname }} </cite>
                     <i class="iconfont icon-renzheng layui-hide-xs" title=""></i>
-                    <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-                    <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+                    <i class="layui-badge fly-badge-vip layui-hide-xs" style="display: none">VIP3</i>
+                    <img src="{{ getImagePath(auth('member')->user()->avatar) }}">
                 </a>
                 <dl class="layui-nav-child">
 
+                    <dd><a href="{{route('home.user')}}" title="" >积分：{{ auth('member')->user()->score }}</a></dd>
+                    <hr style="margin: 5px 0;">
                     <dd><a href="{{route('home.user')}}" title="" >用户中心</a></dd>
                     <dd><a href="{{route('home.user.profile')}}" title="" >个人资料</a></dd>
                     <dd><a href="{{route('home.user.mine')}}" title="" >我的模板</a></dd>

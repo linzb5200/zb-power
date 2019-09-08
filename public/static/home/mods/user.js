@@ -191,16 +191,14 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
 
             upload.render({
                 elem: '.upload-img'
-                ,url: '/user/upload/'
-                ,size: 50
+                ,url: '/upload/uploadImg/'
+                ,size: 100
                 ,before: function(){
                     avatarAdd.find('.loading').show();
                 }
                 ,done: function(res){
-                    if(res.status == 0){
-                        $.post('/user/set/', {
-                            avatar: res.url
-                        }, function(res){
+                    if(res.code == 0){
+                        fly.json('/user/avatar', {avatar:res.data.id}, function(res){
                             location.reload();
                         });
                     } else {

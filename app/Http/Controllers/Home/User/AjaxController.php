@@ -15,8 +15,22 @@ class AjaxController extends UserCenterController
     {
         parent::__construct();
         $this->middleware('guest:member')
-            ->except(['pwd','nickname','validatephone','changephone','changeemail',
+            ->except(['avatar','pwd','nickname','validatephone','changephone','changeemail',
                 'validateemail','bind_qr','unbind_qq','senddx','sign','top','fav','zan','download']);
+    }
+
+    //修改头像
+    public function avatar(Request $request)
+    {
+
+        $id = auth('member')->user()->id;
+        $member = Member::findOrFail($id);
+        $avatar = $request->input('avatar');
+
+        if ($avatar && $member->update(['avatar'=>$request->input('avatar')])){
+            return response()->json(['status' => 0,'msg' => '修改成功']);
+        }
+        return response()->json(['status' => 1099,'msg' => '系统错误']);
     }
 
     //修改密码
@@ -204,6 +218,10 @@ class AjaxController extends UserCenterController
 
         if($latest['today']){
             return response()->json(['status' => 1099,'msg' => '今日已签到']);
+        }
+
+        if($latest['now']->keep == 0){
+            $latest['now']->keep =1;
         }
 
         $data = [

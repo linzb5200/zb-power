@@ -83,10 +83,13 @@ Route::group(['namespace'=>'Home','prefix'=>'user','middleware'=>'member'],funct
     Route::get('mine/zan','User\MineController@zan')->name('home.user.mine.zan');
     Route::get('release','User\MineController@release')->name('home.user.mine.release');
     //我的明细
-    Route::get('details/score','User\DetailsController@score')->name('home.user.details.score');
-    Route::get('details/recharge','User\DetailsController@recharge')->name('home.user.details.recharge');
+    Route::get('orders/score','User\OrdersController@score')->name('home.user.orders.score');
+    Route::get('orders/bill','User\OrdersController@bill')->name('home.user.orders.bill');
+    Route::get('orders/exchange','User\OrdersController@exchange')->name('home.user.orders.exchange');
+    Route::get('orders/pay','User\OrdersController@pay')->name('home.user.orders.pay');
     //ajax
     Route::post('pwd','User\AjaxController@pwd')->name('home.user.pwd');
+    Route::post('avatar','User\AjaxController@avatar')->name('home.user.avatar');
     Route::post('nickname','User\AjaxController@nickname')->name('home.user.nickname');
     Route::post('validatephone','User\AjaxController@validatephone')->name('home.user.validatephone');
     Route::post('changephone','User\AjaxController@changephone')->name('home.user.changephone');

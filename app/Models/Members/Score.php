@@ -55,9 +55,11 @@ class Score extends Model
             $now->keep = $kp;
             $now->days = $yesterday->keep;
         }
-
         if($today){
             $now->days = $today->keep;
+        }
+        if(empty($yesterday) && $today){
+            $now->keep = 1;
         }
 
         return ['today'=>$today,'now'=>$now];
