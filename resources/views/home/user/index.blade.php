@@ -17,11 +17,12 @@
                     <div class="fly-panel-title"> 我的会员信息 </div>
                     <div class="fly-panel-main layui-text" style="padding: 18px 15px; height: 50px; line-height: 26px;">
                         <p> 您拥有：<span style="padding-right: 5px; color: #FF5722;" id="LAY_memberScore">{{$member->score}} 积分</span>
-                            <a href="#" target="_blank" class="layui-btn layui-btn-warm layui-btn-xs">兑换</a>
+                            <a href="#" target="_blank" class="layui-btn layui-btn-warm layui-btn-xs">积分充值</a>
+                            <a href="#" target="_blank" class="layui-btn layui-btn-warm layui-btn-xs">积分兑换VIP</a>
                         </p>
 
                         <p> <span style="padding-right: 20px;">您当前为：非 VIP</span>
-                            <a href="#" target="_blank" class="layui-btn layui-btn-warm layui-btn-xs">充值</a>
+                            <a href="#" target="_blank" class="layui-btn layui-btn-warm layui-btn-xs">VIP充值</a>
                         </p>
                     </div>
                 </div>
@@ -38,10 +39,10 @@
                     <div class="fly-panel-main fly-signin-main">
                         @if($dash['sign']['today'])
                         <button class="layui-btn layui-btn-disabled" id="LAY_signin">今日签到</button>
-                        <span>获得了<cite>{{$dash['sign']['today']->change}}</cite>金币</span>
+                        <span>获得了<cite>{{$dash['sign']['today']->change}}</cite>积分</span>
                         @else
                         <button class="layui-btn layui-btn-danger" id="LAY_signin">今日签到</button>
-                        <span>可获得<cite>{{$dash['sign']['now']->change}}</cite>金币</span>
+                        <span>可获得<cite>{{$dash['sign']['now']->change}}</cite>积分</span>
                         @endif
 
                     </div>

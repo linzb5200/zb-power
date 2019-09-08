@@ -219,6 +219,9 @@ function getArg($args){
 // 获取图片路径
 function getImagePath($id)
 {
+    if(empty($id)){
+        return '';
+    }
     $media = new \App\Models\Medias();
     return $media->getPathById($id);
 }
@@ -620,4 +623,15 @@ function timeAgo($agoTime)
         return $num . '分钟前';
     }
     return '1分钟前';
+}
+
+function hello(){
+    date_default_timezone_set('Asia/Shanghai');
+    $h=date("H");
+    if($h<6) echo "凌晨好!";
+    else if($h<9) echo "早上好！";
+    else if($h<12) echo "上午好！";
+    else if($h<14) echo "中午好！";
+    else if($h<18) echo "下午好！";
+    else echo "晚上好！";
 }

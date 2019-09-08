@@ -28,14 +28,14 @@
                     <div class="fly-detail-info">
 
                         <div style="display: none">
-                            <!-- <span class="layui-badge">审核中</span> -->
-                            <span class="layui-badge layui-bg-green fly-detail-column">动态</span>
+                        <!-- <span class="layui-badge">审核中</span> -->
+                        <span class="layui-badge layui-bg-green fly-detail-column">动态</span>
 
-                            <span class="layui-badge" style="background-color: #999;">未结</span>
-                            <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
+                        <span class="layui-badge" style="background-color: #999;">未结</span>
+                        <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
 
-                            <span class="layui-badge layui-bg-black">置顶</span>
-                            <span class="layui-badge layui-bg-red">精帖</span>
+                        <span class="layui-badge layui-bg-black">置顶</span>
+                        <span class="layui-badge layui-bg-red">精帖</span>
                         </div>
 
                         <div class="fly-admin-box" data-id="123" style="display:none;">
@@ -81,30 +81,30 @@
                                 <div class="td">{{ $info['size'] }}Mb</div>
                             </li>
                             @if($info['page'] > 0)
-                                <li class="clearfix">
-                                    <div class="fl th">页数</div>
-                                    <div class="td">{{$info['page']}}</div>
-                                </li>
+                            <li class="clearfix">
+                                <div class="fl th">页数</div>
+                                <div class="td">{{$info['page']}}</div>
+                            </li>
                             @endif
                             <li class="clearfix format">
                                 <div class="fl th">文件格式</div>
                                 <div class="td">{{$info['format']}}</div>
                             </li>
                             @if($info['scale'])
-                                <li class="clearfix format">
-                                    <div class="fl th">比例</div>
-                                    <div class="td">
-                                        @foreach($otherAttr['scale'] as $osk => $name)
-                                            @if($arg['scale'] == $osk) {{$name}} @endif
-                                        @endforeach
-                                    </div>
-                                </li>
+                            <li class="clearfix format">
+                                <div class="fl th">比例</div>
+                                <div class="td">
+                                    @foreach($otherAttr['scale'] as $osk => $name)
+                                        @if($arg['scale'] == $osk) {{$name}} @endif
+                                    @endforeach
+                                </div>
+                            </li>
                             @endif
                             @if(isset($info['auth']) && $info['auth'])
-                                <li class="clearfix">
-                                    <div class="fl th">作者</div>
-                                    <div class="td">{{$info['auth']}}</div>
-                                </li>
+                            <li class="clearfix">
+                                <div class="fl th">作者</div>
+                                <div class="td">{{$info['auth']}}</div>
+                            </li>
                             @endif
                             <li class="clearfix">
                                 <div class="fl th">推荐软件</div>
