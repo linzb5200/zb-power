@@ -425,6 +425,8 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
             ,'<tr><td>≥5</td><td>10</td></tr>'
             ,'<tr><td>≥15</td><td>15</td></tr>'
             ,'<tr><td>≥30</td><td>20</td></tr>'
+            ,'<tr><td>≥100</td><td>30</td></tr>'
+            ,'<tr><td>≥365</td><td>50</td></tr>'
           ,'</tbody>'
         ,'</table>'
         ,'<ul>'
@@ -435,7 +437,6 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
       ,'</div>'].join('')
     });
   });
-
   //签到活跃榜
   var tplSigninTop = ['{{# layui.each(d.data, function(index, item){ }}'
     ,'<li>'
