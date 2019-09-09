@@ -7,7 +7,7 @@
         </div>
         <div class="layui-card-body">
             <form class="layui-form" action="{{route('admin.color.store')}}" method="post">
-                @include('admin.color._form')
+                @include('admin.colors._form')
             </form>
         </div>
     </div>

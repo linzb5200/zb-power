@@ -122,7 +122,7 @@ class ProductsCateController extends Controller
 
         if($data['title'] && empty($data['pinyin'])){
             $pinyin = new Pinyin();
-            $data['pinyin'] = $pinyin->permalink($data['title'],'');
+            $data['pinyin'] = $pinyin->abbr($data['title']);
         }
 
         if($data['parent_id'] == 0){

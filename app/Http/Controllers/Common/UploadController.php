@@ -283,13 +283,13 @@ class UploadController extends Controller
                 //检测图片类型，图片就压缩
                 if (in_array(strtolower($ext),$allowImgs)){
                     //剪切压缩
-                    $w = $request->input('w',700);
+                    $w = $request->input('w',750);
                     $h = $request->input('h',null);
                     $imag = public_path().$newFolder.$newName;
                     $img = Image::make($imag);
                     $width = $img->width();
-                    if($width > 700){
-                        $w = 700;
+                    if($width > 750){
+                        $w = 750;
                     }else{
                         $w = $width;
                     }
